@@ -1,0 +1,2529 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- This manual describes the end user interface of the GNU Readline Library
+(version 8.2, 19 September 2022), a library which aids in the
+consistency of user interface across discrete programs which provide
+a command line interface.
+
+Copyright (C) 1988-2022 Free Software Foundation, Inc.
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+A copy of the license is included in the section entitled
+"GNU Free Documentation License".
+ -->
+<title>GNU Readline Library</title>
+
+<meta name="description" content="GNU Readline Library">
+<meta name="keywords" content="GNU Readline Library">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="#Top" rel="start" title="Top">
+<link href="#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="#Command-Line-Editing" rel="next" title="Command Line Editing">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<h1 class="settitle" align="center">GNU Readline Library</h1>
+
+
+
+
+
+
+
+
+
+<div class="top" id="Top">
+<div class="header">
+<p>
+Next: <a href="#Command-Line-Editing" accesskey="n" rel="next">Command Line Editing</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="GNU-Readline-Library"></span><h1 class="top">GNU Readline Library</h1>
+
+<p>This document describes the end user interface of the GNU Readline Library,
+a utility which aids in the consistency of user interface across discrete
+programs which provide a command line interface.
+The Readline home page is <a href="http://www.gnu.org/software/readline/">http://www.gnu.org/software/readline/</a>.
+</p>
+
+
+
+
+
+<div class="Contents_element" id="SEC_Contents">
+<h2 class="contents-heading">Table of Contents</h2>
+
+<div class="contents">
+
+<ul class="no-bullet">
+  <li><a id="toc-Command-Line-Editing-1" href="#Command-Line-Editing">1 Command Line Editing</a>
+  <ul class="no-bullet">
+    <li><a id="toc-Introduction-to-Line-Editing" href="#Introduction-and-Notation">1.1 Introduction to Line Editing</a></li>
+    <li><a id="toc-Readline-Interaction-1" href="#Readline-Interaction">1.2 Readline Interaction</a>
+    <ul class="no-bullet">
+      <li><a id="toc-Readline-Bare-Essentials-1" href="#Readline-Bare-Essentials">1.2.1 Readline Bare Essentials</a></li>
+      <li><a id="toc-Readline-Movement-Commands-1" href="#Readline-Movement-Commands">1.2.2 Readline Movement Commands</a></li>
+      <li><a id="toc-Readline-Killing-Commands-1" href="#Readline-Killing-Commands">1.2.3 Readline Killing Commands</a></li>
+      <li><a id="toc-Readline-Arguments-1" href="#Readline-Arguments">1.2.4 Readline Arguments</a></li>
+      <li><a id="toc-Searching-for-Commands-in-the-History" href="#Searching">1.2.5 Searching for Commands in the History</a></li>
+    </ul></li>
+    <li><a id="toc-Readline-Init-File-1" href="#Readline-Init-File">1.3 Readline Init File</a>
+    <ul class="no-bullet">
+      <li><a id="toc-Readline-Init-File-Syntax-1" href="#Readline-Init-File-Syntax">1.3.1 Readline Init File Syntax</a></li>
+      <li><a id="toc-Conditional-Init-Constructs-1" href="#Conditional-Init-Constructs">1.3.2 Conditional Init Constructs</a></li>
+      <li><a id="toc-Sample-Init-File-1" href="#Sample-Init-File">1.3.3 Sample Init File</a></li>
+    </ul></li>
+    <li><a id="toc-Bindable-Readline-Commands-1" href="#Bindable-Readline-Commands">1.4 Bindable Readline Commands</a>
+    <ul class="no-bullet">
+      <li><a id="toc-Commands-For-Moving-1" href="#Commands-For-Moving">1.4.1 Commands For Moving</a></li>
+      <li><a id="toc-Commands-For-Manipulating-The-History" href="#Commands-For-History">1.4.2 Commands For Manipulating The History</a></li>
+      <li><a id="toc-Commands-For-Changing-Text" href="#Commands-For-Text">1.4.3 Commands For Changing Text</a></li>
+      <li><a id="toc-Killing-And-Yanking" href="#Commands-For-Killing">1.4.4 Killing And Yanking</a></li>
+      <li><a id="toc-Specifying-Numeric-Arguments" href="#Numeric-Arguments">1.4.5 Specifying Numeric Arguments</a></li>
+      <li><a id="toc-Letting-Readline-Type-For-You" href="#Commands-For-Completion">1.4.6 Letting Readline Type For You</a></li>
+      <li><a id="toc-Keyboard-Macros-1" href="#Keyboard-Macros">1.4.7 Keyboard Macros</a></li>
+      <li><a id="toc-Some-Miscellaneous-Commands" href="#Miscellaneous-Commands">1.4.8 Some Miscellaneous Commands</a></li>
+    </ul></li>
+    <li><a id="toc-Readline-vi-Mode-1" href="#Readline-vi-Mode">1.5 Readline vi Mode</a></li>
+  </ul></li>
+  <li><a id="toc-GNU-Free-Documentation-License-1" href="#GNU-Free-Documentation-License">Appendix A GNU Free Documentation License</a></li>
+</ul>
+</div>
+</div>
+<hr>
+<div class="chapter" id="Command-Line-Editing">
+<div class="header">
+<p>
+Next: <a href="#GNU-Free-Documentation-License" accesskey="n" rel="next">GNU Free Documentation License</a>, Previous: <a href="#Top" accesskey="p" rel="prev">GNU Readline Library</a>, Up: <a href="#Top" accesskey="u" rel="up">GNU Readline Library</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Command-Line-Editing-1"></span><h2 class="chapter">1 Command Line Editing</h2>
+
+<p>This chapter describes the basic features of the <small>GNU</small>
+command line editing interface.
+</p>
+
+<ul class="section-toc">
+<li><a href="#Introduction-and-Notation" accesskey="1">Introduction to Line Editing</a></li>
+<li><a href="#Readline-Interaction" accesskey="2">Readline Interaction</a></li>
+<li><a href="#Readline-Init-File" accesskey="3">Readline Init File</a></li>
+<li><a href="#Bindable-Readline-Commands" accesskey="4">Bindable Readline Commands</a></li>
+<li><a href="#Readline-vi-Mode" accesskey="5">Readline vi Mode</a></li>
+</ul>
+<hr>
+<div class="section" id="Introduction-and-Notation">
+<div class="header">
+<p>
+Next: <a href="#Readline-Interaction" accesskey="n" rel="next">Readline Interaction</a>, Up: <a href="#Command-Line-Editing" accesskey="u" rel="up">Command Line Editing</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Introduction-to-Line-Editing"></span><h3 class="section">1.1 Introduction to Line Editing</h3>
+
+<p>The following paragraphs describe the notation used to represent
+keystrokes.
+</p>
+<p>The text <kbd>C-k</kbd> is read as &lsquo;Control-K&rsquo; and describes the character
+produced when the <tt class="key">k</tt> key is pressed while the Control key
+is depressed.
+</p>
+<p>The text <kbd>M-k</kbd> is read as &lsquo;Meta-K&rsquo; and describes the character
+produced when the Meta key (if you have one) is depressed, and the <tt class="key">k</tt>
+key is pressed.
+The Meta key is labeled <tt class="key">ALT</tt> on many keyboards.
+On keyboards with two keys labeled <tt class="key">ALT</tt> (usually to either side of
+the space bar), the <tt class="key">ALT</tt> on the left side is generally set to
+work as a Meta key.
+The <tt class="key">ALT</tt> key on the right may also be configured to work as a
+Meta key or may be configured as some other modifier, such as a
+Compose key for typing accented characters.
+</p>
+<p>If you do not have a Meta or <tt class="key">ALT</tt> key, or another key working as
+a Meta key, the identical keystroke can be generated by typing <tt class="key">ESC</tt>
+<em>first</em>, and then typing <tt class="key">k</tt>.
+Either process is known as <em>metafying</em> the <tt class="key">k</tt> key.
+</p>
+<p>The text <kbd>M-C-k</kbd> is read as &lsquo;Meta-Control-k&rsquo; and describes the
+character produced by <em>metafying</em> <kbd>C-k</kbd>.
+</p>
+<p>In addition, several keys have their own names.  Specifically,
+<tt class="key">DEL</tt>, <tt class="key">ESC</tt>, <tt class="key">LFD</tt>, <tt class="key">SPC</tt>, <tt class="key">RET</tt>, and <tt class="key">TAB</tt> all
+stand for themselves when seen in this text, or in an init file
+(see <a href="#Readline-Init-File">Readline Init File</a>).
+If your keyboard lacks a <tt class="key">LFD</tt> key, typing <tt class="key">C-j</tt> will
+produce the desired character.
+The <tt class="key">RET</tt> key may be labeled <tt class="key">Return</tt> or <tt class="key">Enter</tt> on
+some keyboards.
+</p>
+<hr>
+</div>
+<div class="section" id="Readline-Interaction">
+<div class="header">
+<p>
+Next: <a href="#Readline-Init-File" accesskey="n" rel="next">Readline Init File</a>, Previous: <a href="#Introduction-and-Notation" accesskey="p" rel="prev">Introduction to Line Editing</a>, Up: <a href="#Command-Line-Editing" accesskey="u" rel="up">Command Line Editing</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Readline-Interaction-1"></span><h3 class="section">1.2 Readline Interaction</h3>
+<span id="index-interaction_002c-readline"></span>
+
+<p>Often during an interactive session you type in a long line of text,
+only to notice that the first word on the line is misspelled.  The
+Readline library gives you a set of commands for manipulating the text
+as you type it in, allowing you to just fix your typo, and not forcing
+you to retype the majority of the line.  Using these editing commands,
+you move the cursor to the place that needs correction, and delete or
+insert the text of the corrections.  Then, when you are satisfied with
+the line, you simply press <tt class="key">RET</tt>.  You do not have to be at the
+end of the line to press <tt class="key">RET</tt>; the entire line is accepted
+regardless of the location of the cursor within the line.
+</p>
+
+<ul class="section-toc">
+<li><a href="#Readline-Bare-Essentials" accesskey="1">Readline Bare Essentials</a></li>
+<li><a href="#Readline-Movement-Commands" accesskey="2">Readline Movement Commands</a></li>
+<li><a href="#Readline-Killing-Commands" accesskey="3">Readline Killing Commands</a></li>
+<li><a href="#Readline-Arguments" accesskey="4">Readline Arguments</a></li>
+<li><a href="#Searching" accesskey="5">Searching for Commands in the History</a></li>
+</ul>
+<hr>
+<div class="subsection" id="Readline-Bare-Essentials">
+<div class="header">
+<p>
+Next: <a href="#Readline-Movement-Commands" accesskey="n" rel="next">Readline Movement Commands</a>, Up: <a href="#Readline-Interaction" accesskey="u" rel="up">Readline Interaction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Readline-Bare-Essentials-1"></span><h4 class="subsection">1.2.1 Readline Bare Essentials</h4>
+<span id="index-notation_002c-readline"></span>
+<span id="index-command-editing"></span>
+<span id="index-editing-command-lines"></span>
+
+<p>In order to enter characters into the line, simply type them.  The typed
+character appears where the cursor was, and then the cursor moves one
+space to the right.  If you mistype a character, you can use your
+erase character to back up and delete the mistyped character.
+</p>
+<p>Sometimes you may mistype a character, and
+not notice the error until you have typed several other characters.  In
+that case, you can type <kbd>C-b</kbd> to move the cursor to the left, and then
+correct your mistake.  Afterwards, you can move the cursor to the right
+with <kbd>C-f</kbd>.
+</p>
+<p>When you add text in the middle of a line, you will notice that characters
+to the right of the cursor are &lsquo;pushed over&rsquo; to make room for the text
+that you have inserted.  Likewise, when you delete text behind the cursor,
+characters to the right of the cursor are &lsquo;pulled back&rsquo; to fill in the
+blank space created by the removal of the text.  A list of the bare
+essentials for editing the text of an input line follows.
+</p>
+<dl compact="compact">
+<dt><span><kbd>C-b</kbd></span></dt>
+<dd><p>Move back one character.
+</p></dd>
+<dt><span><kbd>C-f</kbd></span></dt>
+<dd><p>Move forward one character.
+</p></dd>
+<dt><span><tt class="key">DEL</tt> or <tt class="key">Backspace</tt></span></dt>
+<dd><p>Delete the character to the left of the cursor.
+</p></dd>
+<dt><span><kbd>C-d</kbd></span></dt>
+<dd><p>Delete the character underneath the cursor.
+</p></dd>
+<dt><span>Printing&nbsp;characters<!-- /@w --></span></dt>
+<dd><p>Insert the character into the line at the cursor.
+</p></dd>
+<dt><span><kbd>C-_</kbd> or <kbd>C-x C-u</kbd></span></dt>
+<dd><p>Undo the last editing command.  You can undo all the way back to an
+empty line.
+</p></dd>
+</dl>
+
+<p>(Depending on your configuration, the <tt class="key">Backspace</tt> key might be set to
+delete the character to the left of the cursor and the <tt class="key">DEL</tt> key set
+to delete the character underneath the cursor, like <kbd>C-d</kbd>, rather
+than the character to the left of the cursor.)
+</p>
+<hr>
+</div>
+<div class="subsection" id="Readline-Movement-Commands">
+<div class="header">
+<p>
+Next: <a href="#Readline-Killing-Commands" accesskey="n" rel="next">Readline Killing Commands</a>, Previous: <a href="#Readline-Bare-Essentials" accesskey="p" rel="prev">Readline Bare Essentials</a>, Up: <a href="#Readline-Interaction" accesskey="u" rel="up">Readline Interaction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Readline-Movement-Commands-1"></span><h4 class="subsection">1.2.2 Readline Movement Commands</h4>
+
+
+<p>The above table describes the most basic keystrokes that you need
+in order to do editing of the input line.  For your convenience, many
+other commands have been added in addition to <kbd>C-b</kbd>, <kbd>C-f</kbd>,
+<kbd>C-d</kbd>, and <tt class="key">DEL</tt>.  Here are some commands for moving more rapidly
+about the line.
+</p>
+<dl compact="compact">
+<dt><span><kbd>C-a</kbd></span></dt>
+<dd><p>Move to the start of the line.
+</p></dd>
+<dt><span><kbd>C-e</kbd></span></dt>
+<dd><p>Move to the end of the line.
+</p></dd>
+<dt><span><kbd>M-f</kbd></span></dt>
+<dd><p>Move forward a word, where a word is composed of letters and digits.
+</p></dd>
+<dt><span><kbd>M-b</kbd></span></dt>
+<dd><p>Move backward a word.
+</p></dd>
+<dt><span><kbd>C-l</kbd></span></dt>
+<dd><p>Clear the screen, reprinting the current line at the top.
+</p></dd>
+</dl>
+
+<p>Notice how <kbd>C-f</kbd> moves forward a character, while <kbd>M-f</kbd> moves
+forward a word.  It is a loose convention that control keystrokes
+operate on characters while meta keystrokes operate on words.
+</p>
+<hr>
+</div>
+<div class="subsection" id="Readline-Killing-Commands">
+<div class="header">
+<p>
+Next: <a href="#Readline-Arguments" accesskey="n" rel="next">Readline Arguments</a>, Previous: <a href="#Readline-Movement-Commands" accesskey="p" rel="prev">Readline Movement Commands</a>, Up: <a href="#Readline-Interaction" accesskey="u" rel="up">Readline Interaction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Readline-Killing-Commands-1"></span><h4 class="subsection">1.2.3 Readline Killing Commands</h4>
+
+<span id="index-killing-text"></span>
+<span id="index-yanking-text"></span>
+
+<p><em>Killing</em> text means to delete the text from the line, but to save
+it away for later use, usually by <em>yanking</em> (re-inserting)
+it back into the line.
+(&lsquo;Cut&rsquo; and &lsquo;paste&rsquo; are more recent jargon for &lsquo;kill&rsquo; and &lsquo;yank&rsquo;.)
+</p>
+<p>If the description for a command says that it &lsquo;kills&rsquo; text, then you can
+be sure that you can get the text back in a different (or the same)
+place later.
+</p>
+<p>When you use a kill command, the text is saved in a <em>kill-ring</em>.
+Any number of consecutive kills save all of the killed text together, so
+that when you yank it back, you get it all.  The kill
+ring is not line specific; the text that you killed on a previously
+typed line is available to be yanked back later, when you are typing
+another line.
+<span id="index-kill-ring"></span>
+</p>
+<p>Here is the list of commands for killing text.
+</p>
+<dl compact="compact">
+<dt><span><kbd>C-k</kbd></span></dt>
+<dd><p>Kill the text from the current cursor position to the end of the line.
+</p>
+</dd>
+<dt><span><kbd>M-d</kbd></span></dt>
+<dd><p>Kill from the cursor to the end of the current word, or, if between
+words, to the end of the next word.
+Word boundaries are the same as those used by <kbd>M-f</kbd>.
+</p>
+</dd>
+<dt><span><kbd>M-<span class="key">DEL</span></kbd></span></dt>
+<dd><p>Kill from the cursor to the start of the current word, or, if between
+words, to the start of the previous word.
+Word boundaries are the same as those used by <kbd>M-b</kbd>.
+</p>
+</dd>
+<dt><span><kbd>C-w</kbd></span></dt>
+<dd><p>Kill from the cursor to the previous whitespace.  This is different than
+<kbd>M-<span class="key">DEL</span></kbd> because the word boundaries differ.
+</p>
+</dd>
+</dl>
+
+<p>Here is how to <em>yank</em> the text back into the line.  Yanking
+means to copy the most-recently-killed text from the kill buffer.
+</p>
+<dl compact="compact">
+<dt><span><kbd>C-y</kbd></span></dt>
+<dd><p>Yank the most recently killed text back into the buffer at the cursor.
+</p>
+</dd>
+<dt><span><kbd>M-y</kbd></span></dt>
+<dd><p>Rotate the kill-ring, and yank the new top.  You can only do this if
+the prior command is <kbd>C-y</kbd> or <kbd>M-y</kbd>.
+</p></dd>
+</dl>
+
+<hr>
+</div>
+<div class="subsection" id="Readline-Arguments">
+<div class="header">
+<p>
+Next: <a href="#Searching" accesskey="n" rel="next">Searching for Commands in the History</a>, Previous: <a href="#Readline-Killing-Commands" accesskey="p" rel="prev">Readline Killing Commands</a>, Up: <a href="#Readline-Interaction" accesskey="u" rel="up">Readline Interaction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Readline-Arguments-1"></span><h4 class="subsection">1.2.4 Readline Arguments</h4>
+
+<p>You can pass numeric arguments to Readline commands.  Sometimes the
+argument acts as a repeat count, other times it is the <i>sign</i> of the
+argument that is significant.  If you pass a negative argument to a
+command which normally acts in a forward direction, that command will
+act in a backward direction.  For example, to kill text back to the
+start of the line, you might type &lsquo;<samp>M-- C-k</samp>&rsquo;.
+</p>
+<p>The general way to pass numeric arguments to a command is to type meta
+digits before the command.  If the first &lsquo;digit&rsquo; typed is a minus
+sign (&lsquo;<samp>-</samp>&rsquo;), then the sign of the argument will be negative.  Once
+you have typed one meta digit to get the argument started, you can type
+the remainder of the digits, and then the command.  For example, to give
+the <kbd>C-d</kbd> command an argument of 10, you could type &lsquo;<samp>M-1 0 C-d</samp>&rsquo;,
+which will delete the next ten characters on the input line.
+</p>
+<hr>
+</div>
+<div class="subsection" id="Searching">
+<div class="header">
+<p>
+Previous: <a href="#Readline-Arguments" accesskey="p" rel="prev">Readline Arguments</a>, Up: <a href="#Readline-Interaction" accesskey="u" rel="up">Readline Interaction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Searching-for-Commands-in-the-History"></span><h4 class="subsection">1.2.5 Searching for Commands in the History</h4>
+
+<p>Readline provides commands for searching through the command history
+for lines containing a specified string.
+There are two search modes:  <em>incremental</em> and <em>non-incremental</em>.
+</p>
+<p>Incremental searches begin before the user has finished typing the
+search string.
+As each character of the search string is typed, Readline displays
+the next entry from the history matching the string typed so far.
+An incremental search requires only as many characters as needed to
+find the desired history entry.
+To search backward in the history for a particular string, type
+<kbd>C-r</kbd>.  Typing <kbd>C-s</kbd> searches forward through the history.
+The characters present in the value of the <code>isearch-terminators</code> variable
+are used to terminate an incremental search.
+If that variable has not been assigned a value, the <tt class="key">ESC</tt> and
+<kbd>C-J</kbd> characters will terminate an incremental search.
+<kbd>C-g</kbd> will abort an incremental search and restore the original line.
+When the search is terminated, the history entry containing the
+search string becomes the current line.
+</p>
+<p>To find other matching entries in the history list, type <kbd>C-r</kbd> or
+<kbd>C-s</kbd> as appropriate.
+This will search backward or forward in the history for the next
+entry matching the search string typed so far.
+Any other key sequence bound to a Readline command will terminate
+the search and execute that command.
+For instance, a <tt class="key">RET</tt> will terminate the search and accept
+the line, thereby executing the command from the history list.
+A movement command will terminate the search, make the last line found
+the current line, and begin editing.
+</p>
+<p>Readline remembers the last incremental search string.  If two
+<kbd>C-r</kbd>s are typed without any intervening characters defining a new
+search string, any remembered search string is used.
+</p>
+<p>Non-incremental searches read the entire search string before starting
+to search for matching history lines.  The search string may be
+typed by the user or be part of the contents of the current line.
+</p>
+<hr>
+</div>
+</div>
+<div class="section" id="Readline-Init-File">
+<div class="header">
+<p>
+Next: <a href="#Bindable-Readline-Commands" accesskey="n" rel="next">Bindable Readline Commands</a>, Previous: <a href="#Readline-Interaction" accesskey="p" rel="prev">Readline Interaction</a>, Up: <a href="#Command-Line-Editing" accesskey="u" rel="up">Command Line Editing</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Readline-Init-File-1"></span><h3 class="section">1.3 Readline Init File</h3>
+<span id="index-initialization-file_002c-readline"></span>
+
+<p>Although the Readline library comes with a set of Emacs-like
+keybindings installed by default, it is possible to use a different set
+of keybindings.
+Any user can customize programs that use Readline by putting
+commands in an <em>inputrc</em> file,
+conventionally in their home directory.
+The name of this
+file is taken from the value of the environment variable <code>INPUTRC</code>.  If
+that variable is unset, the default is <samp>~/.inputrc</samp>.  If that
+file does not exist or cannot be read, the ultimate default is
+<samp>/etc/inputrc</samp>.
+</p>
+<p>When a program which uses the Readline library starts up, the
+init file is read, and the key bindings are set.
+</p>
+<p>In addition, the <code>C-x C-r</code> command re-reads this init file, thus
+incorporating any changes that you might have made to it.
+</p>
+
+<ul class="section-toc">
+<li><a href="#Readline-Init-File-Syntax" accesskey="1">Readline Init File Syntax</a></li>
+<li><a href="#Conditional-Init-Constructs" accesskey="2">Conditional Init Constructs</a></li>
+<li><a href="#Sample-Init-File" accesskey="3">Sample Init File</a></li>
+</ul>
+<hr>
+<div class="subsection" id="Readline-Init-File-Syntax">
+<div class="header">
+<p>
+Next: <a href="#Conditional-Init-Constructs" accesskey="n" rel="next">Conditional Init Constructs</a>, Up: <a href="#Readline-Init-File" accesskey="u" rel="up">Readline Init File</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Readline-Init-File-Syntax-1"></span><h4 class="subsection">1.3.1 Readline Init File Syntax</h4>
+
+<p>There are only a few basic constructs allowed in the
+Readline init file.  Blank lines are ignored.
+Lines beginning with a &lsquo;<samp>#</samp>&rsquo; are comments.
+Lines beginning with a &lsquo;<samp>$</samp>&rsquo; indicate conditional
+constructs (see <a href="#Conditional-Init-Constructs">Conditional Init Constructs</a>).  Other lines
+denote variable settings and key bindings.
+</p>
+<dl compact="compact">
+<dt><span>Variable Settings</span></dt>
+<dd><p>You can modify the run-time behavior of Readline by
+altering the values of variables in Readline
+using the <code>set</code> command within the init file.
+The syntax is simple:
+</p>
+<div class="example">
+<pre class="example">set <var>variable</var> <var>value</var>
+</pre></div>
+
+<p>Here, for example, is how to
+change from the default Emacs-like key binding to use
+<code>vi</code> line editing commands:
+</p>
+<div class="example">
+<pre class="example">set editing-mode vi
+</pre></div>
+
+<p>Variable names and values, where appropriate, are recognized without regard
+to case.  Unrecognized variable names are ignored.
+</p>
+<p>Boolean variables (those that can be set to on or off) are set to on if
+the value is null or empty, <var>on</var> (case-insensitive), or 1.  Any other
+value results in the variable being set to off.
+</p>
+
+<p>A great deal of run-time behavior is changeable with the following
+variables.
+</p>
+<span id="index-variables_002c-readline"></span>
+<dl compact="compact">
+<dt id='index-active_002dregion_002dstart_002dcolor'><span><code>active-region-start-color</code><a href='#index-active_002dregion_002dstart_002dcolor' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>A string variable that controls the text color and background when displaying
+the text in the active region (see the description of
+<code>enable-active-region</code> below).
+This string must not take up any physical character positions on the display,
+so it should consist only of terminal escape sequences.
+It is output to the terminal before displaying the text in the active region.
+This variable is reset to the default value whenever the terminal type changes.
+The default value is the string that puts the terminal in standout mode,
+as obtained from the terminal&rsquo;s terminfo description.
+A sample value might be &lsquo;<samp>\e[01;33m</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-active_002dregion_002dend_002dcolor'><span><code>active-region-end-color</code><a href='#index-active_002dregion_002dend_002dcolor' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>A string variable that &quot;undoes&quot; the effects of <code>active-region-start-color</code>
+and restores &quot;normal&quot; terminal display appearance after displaying text
+in the active region.
+This string must not take up any physical character positions on the display,
+so it should consist only of terminal escape sequences.
+It is output to the terminal after displaying the text in the active region.
+This variable is reset to the default value whenever the terminal type changes.
+The default value is the string that restores the terminal from standout mode,
+as obtained from the terminal&rsquo;s terminfo description.
+A sample value might be &lsquo;<samp>\e[0m</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-bell_002dstyle'><span><code>bell-style</code><a href='#index-bell_002dstyle' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Controls what happens when Readline wants to ring the terminal bell.
+If set to &lsquo;<samp>none</samp>&rsquo;, Readline never rings the bell.  If set to
+&lsquo;<samp>visible</samp>&rsquo;, Readline uses a visible bell if one is available.
+If set to &lsquo;<samp>audible</samp>&rsquo; (the default), Readline attempts to ring
+the terminal&rsquo;s bell.
+</p>
+</dd>
+<dt id='index-bind_002dtty_002dspecial_002dchars'><span><code>bind-tty-special-chars</code><a href='#index-bind_002dtty_002dspecial_002dchars' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo; (the default), Readline attempts to bind the control
+characters   treated specially by the kernel&rsquo;s terminal driver to their
+Readline equivalents.
+</p>
+</dd>
+<dt id='index-blink_002dmatching_002dparen'><span><code>blink-matching-paren</code><a href='#index-blink_002dmatching_002dparen' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, Readline attempts to briefly move the cursor to an
+opening parenthesis when a closing parenthesis is inserted.  The default
+is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-colored_002dcompletion_002dprefix'><span><code>colored-completion-prefix</code><a href='#index-colored_002dcompletion_002dprefix' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, when listing completions, Readline displays the
+common prefix of the set of possible completions using a different color.
+The color definitions are taken from the value of the <code>LS_COLORS</code>
+environment variable.
+If there is a color definition in <code>LS_COLORS</code> for the custom suffix
+&lsquo;<samp>readline-colored-completion-prefix</samp>&rsquo;, Readline uses this color for
+the common prefix instead of its default.
+The default is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-colored_002dstats'><span><code>colored-stats</code><a href='#index-colored_002dstats' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, Readline displays possible completions using different
+colors to indicate their file type.
+The color definitions are taken from the value of the <code>LS_COLORS</code>
+environment variable.
+The default is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-comment_002dbegin'><span><code>comment-begin</code><a href='#index-comment_002dbegin' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The string to insert at the beginning of the line when the
+<code>insert-comment</code> command is executed.  The default value
+is <code>&quot;#&quot;</code>.
+</p>
+</dd>
+<dt id='index-completion_002ddisplay_002dwidth'><span><code>completion-display-width</code><a href='#index-completion_002ddisplay_002dwidth' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The number of screen columns used to display possible matches
+when performing completion.
+The value is ignored if it is less than 0 or greater than the terminal
+screen width.
+A value of 0 will cause matches to be displayed one per line.
+The default value is -1.
+</p>
+</dd>
+<dt id='index-completion_002dignore_002dcase'><span><code>completion-ignore-case</code><a href='#index-completion_002dignore_002dcase' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, Readline performs filename matching and completion
+in a case-insensitive fashion.
+The default value is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-completion_002dmap_002dcase'><span><code>completion-map-case</code><a href='#index-completion_002dmap_002dcase' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, and <var>completion-ignore-case</var> is enabled, Readline
+treats hyphens (&lsquo;<samp>-</samp>&rsquo;) and underscores (&lsquo;<samp>_</samp>&rsquo;) as equivalent when
+performing case-insensitive filename matching and completion.
+The default value is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-completion_002dprefix_002ddisplay_002dlength'><span><code>completion-prefix-display-length</code><a href='#index-completion_002dprefix_002ddisplay_002dlength' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The length in characters of the common prefix of a list of possible
+completions that is displayed without modification.  When set to a
+value greater than zero, common prefixes longer than this value are
+replaced with an ellipsis when displaying possible completions.
+</p>
+</dd>
+<dt id='index-completion_002dquery_002ditems'><span><code>completion-query-items</code><a href='#index-completion_002dquery_002ditems' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The number of possible completions that determines when the user is
+asked whether the list of possibilities should be displayed.
+If the number of possible completions is greater than or equal to this value,
+Readline will ask whether or not the user wishes to view them;
+otherwise, they are simply listed.
+This variable must be set to an integer value greater than or equal to zero.
+A zero value means Readline should never ask; negative values are
+treated as zero.
+The default limit is <code>100</code>.
+</p>
+</dd>
+<dt id='index-convert_002dmeta'><span><code>convert-meta</code><a href='#index-convert_002dmeta' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, Readline will convert characters with the
+eighth bit set to an <small>ASCII</small> key sequence by stripping the eighth
+bit and prefixing an <tt class="key">ESC</tt> character, converting them to a
+meta-prefixed key sequence.
+The default value is &lsquo;<samp>on</samp>&rsquo;, but
+will be set to &lsquo;<samp>off</samp>&rsquo; if the locale is one that contains
+eight-bit characters.
+This variable is dependent on the <code>LC_CTYPE</code> locale category, and
+may change if the locale is changed.
+</p>
+</dd>
+<dt id='index-disable_002dcompletion'><span><code>disable-completion</code><a href='#index-disable_002dcompletion' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>On</samp>&rsquo;, Readline will inhibit word completion.
+Completion  characters will be inserted into the line as if they had
+been mapped to <code>self-insert</code>.  The default is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-echo_002dcontrol_002dcharacters'><span><code>echo-control-characters</code><a href='#index-echo_002dcontrol_002dcharacters' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>When set to &lsquo;<samp>on</samp>&rsquo;, on operating systems that indicate they support it,
+Readline echoes a character corresponding to a signal generated from the
+keyboard.  The default is &lsquo;<samp>on</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-editing_002dmode'><span><code>editing-mode</code><a href='#index-editing_002dmode' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The <code>editing-mode</code> variable controls which default set of
+key bindings is used.  By default, Readline starts up in Emacs editing
+mode, where the keystrokes are most similar to Emacs.  This variable can be
+set to either &lsquo;<samp>emacs</samp>&rsquo; or &lsquo;<samp>vi</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-emacs_002dmode_002dstring'><span><code>emacs-mode-string</code><a href='#index-emacs_002dmode_002dstring' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If the <var>show-mode-in-prompt</var> variable is enabled,
+this string is displayed immediately before the last line of the primary
+prompt when emacs editing mode is active.  The value is expanded like a
+key binding, so the standard set of meta- and control prefixes and
+backslash escape sequences is available.
+Use the &lsquo;<samp>\1</samp>&rsquo; and &lsquo;<samp>\2</samp>&rsquo; escapes to begin and end sequences of
+non-printing characters, which can be used to embed a terminal control
+sequence into the mode string.
+The default is &lsquo;<samp>@</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-enable_002dactive_002dregion'><span><code>enable-active-region</code><a href='#index-enable_002dactive_002dregion' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The <em>point</em> is the current cursor position, and <em>mark</em> refers
+to a saved cursor position (see <a href="#Commands-For-Moving">Commands For Moving</a>).
+The text between the point and mark is referred to as the <em>region</em>.
+When this variable is set to &lsquo;<samp>On</samp>&rsquo;, Readline allows certain commands
+to designate the region as <em>active</em>.
+When the region is active, Readline highlights the text in the region using
+the value of the <code>active-region-start-color</code>, which defaults to the
+string that enables
+the terminal&rsquo;s standout mode.
+The active region shows the text inserted by bracketed-paste and any
+matching text found by incremental and non-incremental history searches.
+The default is &lsquo;<samp>On</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-enable_002dbracketed_002dpaste'><span><code>enable-bracketed-paste</code><a href='#index-enable_002dbracketed_002dpaste' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>When set to &lsquo;<samp>On</samp>&rsquo;, Readline configures the terminal to insert each
+paste into the editing buffer as a single string of characters, instead
+of treating each character as if it had been read from the keyboard.
+This is called putting the terminal into <em>bracketed paste mode</em>;
+it prevents Readline from executing any editing commands bound to key
+sequences appearing in the pasted text.
+The default is &lsquo;<samp>On</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-enable_002dkeypad'><span><code>enable-keypad</code><a href='#index-enable_002dkeypad' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>When set to &lsquo;<samp>on</samp>&rsquo;, Readline will try to enable the application
+keypad when it is called.  Some systems need this to enable the
+arrow keys.  The default is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt><span><code>enable-meta-key</code></span></dt>
+<dd><p>When set to &lsquo;<samp>on</samp>&rsquo;, Readline will try to enable any meta modifier
+key the terminal claims to support when it is called.  On many terminals,
+the meta key is used to send eight-bit characters.
+The default is &lsquo;<samp>on</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-expand_002dtilde'><span><code>expand-tilde</code><a href='#index-expand_002dtilde' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, tilde expansion is performed when Readline
+attempts word completion.  The default is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-history_002dpreserve_002dpoint'><span><code>history-preserve-point</code><a href='#index-history_002dpreserve_002dpoint' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, the history code attempts to place the point (the
+current cursor position) at the
+same location on each history line retrieved with <code>previous-history</code>
+or <code>next-history</code>.  The default is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-history_002dsize'><span><code>history-size</code><a href='#index-history_002dsize' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Set the maximum number of history entries saved in the history list.
+If set to zero, any existing history entries are deleted and no new entries
+are saved.
+If set to a value less than zero, the number of history entries is not
+limited.
+By default, the number of history entries is not limited.
+If an attempt is made to set <var>history-size</var> to a non-numeric value,
+the maximum number of history entries will be set to 500.
+</p>
+</dd>
+<dt id='index-horizontal_002dscroll_002dmode'><span><code>horizontal-scroll-mode</code><a href='#index-horizontal_002dscroll_002dmode' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>This variable can be set to either &lsquo;<samp>on</samp>&rsquo; or &lsquo;<samp>off</samp>&rsquo;.  Setting it
+to &lsquo;<samp>on</samp>&rsquo; means that the text of the lines being edited will scroll
+horizontally on a single screen line when they are longer than the width
+of the screen, instead of wrapping onto a new screen line.
+This variable is automatically set to &lsquo;<samp>on</samp>&rsquo; for terminals of height 1.
+By default, this variable is set to &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-input_002dmeta'><span><code>input-meta</code><a href='#index-input_002dmeta' class='copiable-anchor'> &para;</a></span></dt>
+<dd><span id="index-meta_002dflag"></span>
+<p>If set to &lsquo;<samp>on</samp>&rsquo;, Readline will enable eight-bit input (it
+will not clear the eighth bit in the characters it reads),
+regardless of what the terminal claims it can support.  The
+default value is &lsquo;<samp>off</samp>&rsquo;, but Readline will set it to &lsquo;<samp>on</samp>&rsquo; if the 
+locale contains eight-bit characters.
+The name <code>meta-flag</code> is a synonym for this variable.
+This variable is dependent on the <code>LC_CTYPE</code> locale category, and
+may change if the locale is changed.
+</p>
+</dd>
+<dt id='index-isearch_002dterminators'><span><code>isearch-terminators</code><a href='#index-isearch_002dterminators' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The string of characters that should terminate an incremental search without
+subsequently executing the character as a command (see <a href="#Searching">Searching for Commands in the History</a>).
+If this variable has not been given a value, the characters <tt class="key">ESC</tt> and
+<kbd>C-J</kbd> will terminate an incremental search.
+</p>
+</dd>
+<dt id='index-keymap'><span><code>keymap</code><a href='#index-keymap' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Sets Readline&rsquo;s idea of the current keymap for key binding commands.
+Built-in <code>keymap</code> names are
+<code>emacs</code>,
+<code>emacs-standard</code>,
+<code>emacs-meta</code>,
+<code>emacs-ctlx</code>,
+<code>vi</code>,
+<code>vi-move</code>,
+<code>vi-command</code>, and
+<code>vi-insert</code>.
+<code>vi</code> is equivalent to <code>vi-command</code> (<code>vi-move</code> is also a
+synonym); <code>emacs</code> is equivalent to <code>emacs-standard</code>.
+Applications may add additional names.
+The default value is <code>emacs</code>.
+The value of the <code>editing-mode</code> variable also affects the
+default keymap.
+</p>
+</dd>
+<dt><span><code>keyseq-timeout</code></span></dt>
+<dd><p>Specifies the duration Readline will wait for a character when reading an
+ambiguous key sequence (one that can form a complete key sequence using
+the input read so far, or can take additional input to complete a longer
+key sequence).
+If no input is received within the timeout, Readline will use the shorter
+but complete key sequence.
+Readline uses this value to determine whether or not input is
+available on the current input source (<code>rl_instream</code> by default).
+The value is specified in milliseconds, so a value of 1000 means that
+Readline will wait one second for additional input.
+If this variable is set to a value less than or equal to zero, or to a
+non-numeric value, Readline will wait until another key is pressed to
+decide which key sequence to complete.
+The default value is <code>500</code>.
+</p>
+</dd>
+<dt><span><code>mark-directories</code></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, completed directory names have a slash
+appended.  The default is &lsquo;<samp>on</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-mark_002dmodified_002dlines'><span><code>mark-modified-lines</code><a href='#index-mark_002dmodified_002dlines' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>This variable, when set to &lsquo;<samp>on</samp>&rsquo;, causes Readline to display an
+asterisk (&lsquo;<samp>*</samp>&rsquo;) at the start of history lines which have been modified.
+This variable is &lsquo;<samp>off</samp>&rsquo; by default.
+</p>
+</dd>
+<dt id='index-mark_002dsymlinked_002ddirectories'><span><code>mark-symlinked-directories</code><a href='#index-mark_002dsymlinked_002ddirectories' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, completed names which are symbolic links
+to directories have a slash appended (subject to the value of
+<code>mark-directories</code>).
+The default is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-match_002dhidden_002dfiles'><span><code>match-hidden-files</code><a href='#index-match_002dhidden_002dfiles' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>This variable, when set to &lsquo;<samp>on</samp>&rsquo;, causes Readline to match files whose
+names begin with a &lsquo;<samp>.</samp>&rsquo; (hidden files) when performing filename
+completion.
+If set to &lsquo;<samp>off</samp>&rsquo;, the leading &lsquo;<samp>.</samp>&rsquo; must be
+supplied by the user in the filename to be completed.
+This variable is &lsquo;<samp>on</samp>&rsquo; by default.
+</p>
+</dd>
+<dt id='index-menu_002dcomplete_002ddisplay_002dprefix'><span><code>menu-complete-display-prefix</code><a href='#index-menu_002dcomplete_002ddisplay_002dprefix' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, menu completion displays the common prefix of the
+list of possible completions (which may be empty) before cycling through
+the list.  The default is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-output_002dmeta'><span><code>output-meta</code><a href='#index-output_002dmeta' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, Readline will display characters with the
+eighth bit set directly rather than as a meta-prefixed escape
+sequence.
+The default is &lsquo;<samp>off</samp>&rsquo;, but Readline will set it to &lsquo;<samp>on</samp>&rsquo; if the
+locale contains eight-bit characters.
+This variable is dependent on the <code>LC_CTYPE</code> locale category, and
+may change if the locale is changed.
+</p>
+</dd>
+<dt id='index-page_002dcompletions'><span><code>page-completions</code><a href='#index-page_002dcompletions' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, Readline uses an internal <code>more</code>-like pager
+to display a screenful of possible completions at a time.
+This variable is &lsquo;<samp>on</samp>&rsquo; by default.
+</p>
+</dd>
+<dt><span><code>print-completions-horizontally</code></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, Readline will display completions with matches
+sorted horizontally in alphabetical order, rather than down the screen.
+The default is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-revert_002dall_002dat_002dnewline'><span><code>revert-all-at-newline</code><a href='#index-revert_002dall_002dat_002dnewline' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, Readline will undo all changes to history lines
+before returning when <code>accept-line</code> is executed.  By default,
+history lines may be modified and retain individual undo lists across
+calls to <code>readline()</code>.  The default is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-show_002dall_002dif_002dambiguous'><span><code>show-all-if-ambiguous</code><a href='#index-show_002dall_002dif_002dambiguous' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>This alters the default behavior of the completion functions.  If
+set to &lsquo;<samp>on</samp>&rsquo;, 
+words which have more than one possible completion cause the
+matches to be listed immediately instead of ringing the bell.
+The default value is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-show_002dall_002dif_002dunmodified'><span><code>show-all-if-unmodified</code><a href='#index-show_002dall_002dif_002dunmodified' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>This alters the default behavior of the completion functions in
+a fashion similar to <var>show-all-if-ambiguous</var>.
+If set to &lsquo;<samp>on</samp>&rsquo;, 
+words which have more than one possible completion without any
+possible partial completion (the possible completions don&rsquo;t share
+a common prefix) cause the matches to be listed immediately instead
+of ringing the bell.
+The default value is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-show_002dmode_002din_002dprompt'><span><code>show-mode-in-prompt</code><a href='#index-show_002dmode_002din_002dprompt' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, add a string to the beginning of the prompt
+indicating the editing mode: emacs, vi command, or vi insertion.
+The mode strings are user-settable (e.g., <var>emacs-mode-string</var>).
+The default value is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-skip_002dcompleted_002dtext'><span><code>skip-completed-text</code><a href='#index-skip_002dcompleted_002dtext' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, this alters the default completion behavior when
+inserting a single match into the line.  It&rsquo;s only active when
+performing completion in the middle of a word.  If enabled, Readline
+does not insert characters from the completion that match characters
+after point in the word being completed, so portions of the word
+following the cursor are not duplicated.
+For instance, if this is enabled, attempting completion when the cursor
+is after the &lsquo;<samp>e</samp>&rsquo; in &lsquo;<samp>Makefile</samp>&rsquo; will result in &lsquo;<samp>Makefile</samp>&rsquo;
+rather than &lsquo;<samp>Makefilefile</samp>&rsquo;, assuming there is a single possible
+completion.
+The default value is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-vi_002dcmd_002dmode_002dstring'><span><code>vi-cmd-mode-string</code><a href='#index-vi_002dcmd_002dmode_002dstring' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If the <var>show-mode-in-prompt</var> variable is enabled,
+this string is displayed immediately before the last line of the primary
+prompt when vi editing mode is active and in command mode.
+The value is expanded like a
+key binding, so the standard set of meta- and control prefixes and
+backslash escape sequences is available.
+Use the &lsquo;<samp>\1</samp>&rsquo; and &lsquo;<samp>\2</samp>&rsquo; escapes to begin and end sequences of
+non-printing characters, which can be used to embed a terminal control
+sequence into the mode string.
+The default is &lsquo;<samp>(cmd)</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-vi_002dins_002dmode_002dstring'><span><code>vi-ins-mode-string</code><a href='#index-vi_002dins_002dmode_002dstring' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If the <var>show-mode-in-prompt</var> variable is enabled,
+this string is displayed immediately before the last line of the primary
+prompt when vi editing mode is active and in insertion mode.
+The value is expanded like a
+key binding, so the standard set of meta- and control prefixes and
+backslash escape sequences is available.
+Use the &lsquo;<samp>\1</samp>&rsquo; and &lsquo;<samp>\2</samp>&rsquo; escapes to begin and end sequences of
+non-printing characters, which can be used to embed a terminal control
+sequence into the mode string.
+The default is &lsquo;<samp>(ins)</samp>&rsquo;.
+</p>
+</dd>
+<dt id='index-visible_002dstats'><span><code>visible-stats</code><a href='#index-visible_002dstats' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If set to &lsquo;<samp>on</samp>&rsquo;, a character denoting a file&rsquo;s type
+is appended to the filename when listing possible
+completions.  The default is &lsquo;<samp>off</samp>&rsquo;.
+</p>
+</dd>
+</dl>
+
+</dd>
+<dt><span>Key Bindings</span></dt>
+<dd><p>The syntax for controlling key bindings in the init file is
+simple.  First you need to find the name of the command that you
+want to change.  The following sections contain tables of the command
+name, the default keybinding, if any, and a short description of what
+the command does.
+</p>
+<p>Once you know the name of the command, simply place on a line
+in the init file the name of the key
+you wish to bind the command to, a colon, and then the name of the
+command.
+There can be no space between the key name and the colon &ndash; that will be
+interpreted as part of the key name.
+The name of the key can be expressed in different ways, depending on
+what you find most comfortable.
+</p>
+<p>In addition to command names, Readline allows keys to be bound
+to a string that is inserted when the key is pressed (a <var>macro</var>).
+</p>
+
+<dl compact="compact">
+<dt><span><var>keyname</var>:&nbsp;<var><span class="nolinebreak">function-name</span></var>&nbsp;or&nbsp;<var>macro</var><!-- /@w --></span></dt>
+<dd><p><var>keyname</var> is the name of a key spelled out in English.  For example:
+</p><div class="example">
+<pre class="example">Control-u: universal-argument
+Meta-Rubout: backward-kill-word
+Control-o: &quot;&gt; output&quot;
+</pre></div>
+
+<p>In the example above, <kbd>C-u</kbd> is bound to the function
+<code>universal-argument</code>,
+<kbd>M-DEL</kbd> is bound to the function <code>backward-kill-word</code>, and
+<kbd>C-o</kbd> is bound to run the macro
+expressed on the right hand side (that is, to insert the text
+&lsquo;<samp>&gt; output</samp>&rsquo; into the line).
+</p>
+<p>A number of symbolic character names are recognized while
+processing this key binding syntax:
+<var>DEL</var>,
+<var>ESC</var>,
+<var>ESCAPE</var>,
+<var>LFD</var>,
+<var>NEWLINE</var>,
+<var>RET</var>,
+<var>RETURN</var>,
+<var>RUBOUT</var>,
+<var>SPACE</var>,
+<var>SPC</var>,
+and
+<var>TAB</var>.
+</p>
+</dd>
+<dt><span>&quot;<var>keyseq</var>&quot;:&nbsp;<var><span class="nolinebreak">function-name</span></var>&nbsp;or&nbsp;<var>macro</var><!-- /@w --></span></dt>
+<dd><p><var>keyseq</var> differs from <var>keyname</var> above in that strings
+denoting an entire key sequence can be specified, by placing
+the key sequence in double quotes.  Some <small>GNU</small> Emacs style key
+escapes can be used, as in the following example, but the
+special character names are not recognized.
+</p>
+<div class="example">
+<pre class="example">&quot;\C-u&quot;: universal-argument
+&quot;\C-x\C-r&quot;: re-read-init-file
+&quot;\e[11~&quot;: &quot;Function Key 1&quot;
+</pre></div>
+
+<p>In the above example, <kbd>C-u</kbd> is again bound to the function
+<code>universal-argument</code> (just as it was in the first example),
+&lsquo;<samp><kbd>C-x</kbd> <kbd>C-r</kbd></samp>&rsquo; is bound to the function <code>re-read-init-file</code>,
+and &lsquo;<samp><span class="key">ESC</span> <span class="key">[</span> <span class="key">1</span> <span class="key">1</span> <span class="key">~</span></samp>&rsquo; is bound to insert
+the text &lsquo;<samp>Function Key 1</samp>&rsquo;.
+</p>
+</dd>
+</dl>
+
+<p>The following <small>GNU</small> Emacs style escape sequences are available when
+specifying key sequences:
+</p>
+<dl compact="compact">
+<dt><span><code><kbd>\C-</kbd></code></span></dt>
+<dd><p>control prefix
+</p></dd>
+<dt><span><code><kbd>\M-</kbd></code></span></dt>
+<dd><p>meta prefix
+</p></dd>
+<dt><span><code><kbd>\e</kbd></code></span></dt>
+<dd><p>an escape character
+</p></dd>
+<dt><span><code><kbd>\\</kbd></code></span></dt>
+<dd><p>backslash
+</p></dd>
+<dt><span><code><kbd>\&quot;</kbd></code></span></dt>
+<dd><p><tt class="key">&quot;</tt>, a double quotation mark
+</p></dd>
+<dt><span><code><kbd>\'</kbd></code></span></dt>
+<dd><p><tt class="key">'</tt>, a single quote or apostrophe
+</p></dd>
+</dl>
+
+<p>In addition to the <small>GNU</small> Emacs style escape sequences, a second
+set of backslash escapes is available:
+</p>
+<dl compact="compact">
+<dt><span><code>\a</code></span></dt>
+<dd><p>alert (bell)
+</p></dd>
+<dt><span><code>\b</code></span></dt>
+<dd><p>backspace
+</p></dd>
+<dt><span><code>\d</code></span></dt>
+<dd><p>delete
+</p></dd>
+<dt><span><code>\f</code></span></dt>
+<dd><p>form feed
+</p></dd>
+<dt><span><code>\n</code></span></dt>
+<dd><p>newline
+</p></dd>
+<dt><span><code>\r</code></span></dt>
+<dd><p>carriage return
+</p></dd>
+<dt><span><code>\t</code></span></dt>
+<dd><p>horizontal tab
+</p></dd>
+<dt><span><code>\v</code></span></dt>
+<dd><p>vertical tab
+</p></dd>
+<dt><span><code>\<var>nnn</var></code></span></dt>
+<dd><p>the eight-bit character whose value is the octal value <var>nnn</var>
+(one to three digits)
+</p></dd>
+<dt><span><code>\x<var>HH</var></code></span></dt>
+<dd><p>the eight-bit character whose value is the hexadecimal value <var>HH</var>
+(one or two hex digits)
+</p></dd>
+</dl>
+
+<p>When entering the text of a macro, single or double quotes must
+be used to indicate a macro definition.
+Unquoted text is assumed to be a function name.
+In the macro body, the backslash escapes described above are expanded.
+Backslash will quote any other character in the macro text,
+including &lsquo;<samp>&quot;</samp>&rsquo; and &lsquo;<samp>'</samp>&rsquo;.
+For example, the following binding will make &lsquo;<samp><kbd>C-x</kbd> \</samp>&rsquo;
+insert a single &lsquo;<samp>\</samp>&rsquo; into the line:
+</p><div class="example">
+<pre class="example">&quot;\C-x\\&quot;: &quot;\\&quot;
+</pre></div>
+
+</dd>
+</dl>
+
+<hr>
+</div>
+<div class="subsection" id="Conditional-Init-Constructs">
+<div class="header">
+<p>
+Next: <a href="#Sample-Init-File" accesskey="n" rel="next">Sample Init File</a>, Previous: <a href="#Readline-Init-File-Syntax" accesskey="p" rel="prev">Readline Init File Syntax</a>, Up: <a href="#Readline-Init-File" accesskey="u" rel="up">Readline Init File</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Conditional-Init-Constructs-1"></span><h4 class="subsection">1.3.2 Conditional Init Constructs</h4>
+
+<p>Readline implements a facility similar in spirit to the conditional
+compilation features of the C preprocessor which allows key
+bindings and variable settings to be performed as the result
+of tests.  There are four parser directives used.
+</p>
+<dl compact="compact">
+<dt><span><code>$if</code></span></dt>
+<dd><p>The <code>$if</code> construct allows bindings to be made based on the
+editing mode, the terminal being used, or the application using
+Readline.  The text of the test, after any comparison operator,
+extends to the end of the line;
+unless otherwise noted, no characters are required to isolate it.
+</p>
+<dl compact="compact">
+<dt><span><code>mode</code></span></dt>
+<dd><p>The <code>mode=</code> form of the <code>$if</code> directive is used to test
+whether Readline is in <code>emacs</code> or <code>vi</code> mode.
+This may be used in conjunction
+with the &lsquo;<samp>set keymap</samp>&rsquo; command, for instance, to set bindings in
+the <code>emacs-standard</code> and <code>emacs-ctlx</code> keymaps only if
+Readline is starting out in <code>emacs</code> mode.
+</p>
+</dd>
+<dt><span><code>term</code></span></dt>
+<dd><p>The <code>term=</code> form may be used to include terminal-specific
+key bindings, perhaps to bind the key sequences output by the
+terminal&rsquo;s function keys.  The word on the right side of the
+&lsquo;<samp>=</samp>&rsquo; is tested against both the full name of the terminal and
+the portion of the terminal name before the first &lsquo;<samp>-</samp>&rsquo;.  This
+allows <code>sun</code> to match both <code>sun</code> and <code>sun-cmd</code>,
+for instance.
+</p>
+</dd>
+<dt><span><code>version</code></span></dt>
+<dd><p>The <code>version</code> test may be used to perform comparisons against
+specific Readline versions.
+The <code>version</code> expands to the current Readline version.
+The set of comparison operators includes
+&lsquo;<samp>=</samp>&rsquo; (and &lsquo;<samp>==</samp>&rsquo;), &lsquo;<samp>!=</samp>&rsquo;, &lsquo;<samp>&lt;=</samp>&rsquo;, &lsquo;<samp>&gt;=</samp>&rsquo;, &lsquo;<samp>&lt;</samp>&rsquo;,
+and &lsquo;<samp>&gt;</samp>&rsquo;.
+The version number supplied on the right side of the operator consists
+of a major version number, an optional decimal point, and an optional
+minor version (e.g., &lsquo;<samp>7.1</samp>&rsquo;). If the minor version is omitted, it
+is assumed to be &lsquo;<samp>0</samp>&rsquo;.
+The operator may be separated from the string <code>version</code> and
+from the version number argument by whitespace.
+The following example sets a variable if the Readline version being used
+is 7.0 or newer:
+</p><div class="example">
+<pre class="example">$if version &gt;= 7.0
+set show-mode-in-prompt on
+$endif
+</pre></div>
+
+</dd>
+<dt><span><code>application</code></span></dt>
+<dd><p>The <var>application</var> construct is used to include
+application-specific settings.  Each program using the Readline
+library sets the <var>application name</var>, and you can test for
+a particular value. 
+This could be used to bind key sequences to functions useful for
+a specific program.  For instance, the following command adds a
+key sequence that quotes the current or previous word in Bash:
+</p><div class="example">
+<pre class="example">$if Bash
+# Quote the current or previous word
+&quot;\C-xq&quot;: &quot;\eb\&quot;\ef\&quot;&quot;
+$endif
+</pre></div>
+
+</dd>
+<dt><span><code>variable</code></span></dt>
+<dd><p>The <var>variable</var> construct provides simple equality tests for Readline
+variables and values.
+The permitted comparison operators are &lsquo;<samp>=</samp>&rsquo;, &lsquo;<samp>==</samp>&rsquo;, and &lsquo;<samp>!=</samp>&rsquo;.
+The variable name must be separated from the comparison operator by
+whitespace; the operator may be separated from the value on the right hand
+side by whitespace.
+Both string and boolean variables may be tested. Boolean variables must be
+tested against the values <var>on</var> and <var>off</var>.
+The following example is equivalent to the <code>mode=emacs</code> test described
+above:
+</p><div class="example">
+<pre class="example">$if editing-mode == emacs
+set show-mode-in-prompt on
+$endif
+</pre></div>
+</dd>
+</dl>
+
+</dd>
+<dt><span><code>$endif</code></span></dt>
+<dd><p>This command, as seen in the previous example, terminates an
+<code>$if</code> command.
+</p>
+</dd>
+<dt><span><code>$else</code></span></dt>
+<dd><p>Commands in this branch of the <code>$if</code> directive are executed if
+the test fails.
+</p>
+</dd>
+<dt><span><code>$include</code></span></dt>
+<dd><p>This directive takes a single filename as an argument and reads commands
+and bindings from that file.
+For example, the following directive reads from <samp>/etc/inputrc</samp>:
+</p><div class="example">
+<pre class="example">$include /etc/inputrc
+</pre></div>
+</dd>
+</dl>
+
+<hr>
+</div>
+<div class="subsection" id="Sample-Init-File">
+<div class="header">
+<p>
+Previous: <a href="#Conditional-Init-Constructs" accesskey="p" rel="prev">Conditional Init Constructs</a>, Up: <a href="#Readline-Init-File" accesskey="u" rel="up">Readline Init File</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Sample-Init-File-1"></span><h4 class="subsection">1.3.3 Sample Init File</h4>
+
+<p>Here is an example of an <var>inputrc</var> file.  This illustrates key
+binding, variable assignment, and conditional syntax.
+</p>
+<div class="example">
+<pre class="example"># This file controls the behaviour of line input editing for
+# programs that use the GNU Readline library.  Existing
+# programs include FTP, Bash, and GDB.
+#
+# You can re-read the inputrc file with C-x C-r.
+# Lines beginning with '#' are comments.
+#
+# First, include any system-wide bindings and variable
+# assignments from /etc/Inputrc
+$include /etc/Inputrc
+
+#
+# Set various bindings for emacs mode.
+
+set editing-mode emacs 
+
+$if mode=emacs
+
+Meta-Control-h:	backward-kill-word	Text after the function name is ignored
+
+#
+# Arrow keys in keypad mode
+#
+#&quot;\M-OD&quot;:        backward-char
+#&quot;\M-OC&quot;:        forward-char
+#&quot;\M-OA&quot;:        previous-history
+#&quot;\M-OB&quot;:        next-history
+#
+# Arrow keys in ANSI mode
+#
+&quot;\M-[D&quot;:        backward-char
+&quot;\M-[C&quot;:        forward-char
+&quot;\M-[A&quot;:        previous-history
+&quot;\M-[B&quot;:        next-history
+#
+# Arrow keys in 8 bit keypad mode
+#
+#&quot;\M-\C-OD&quot;:       backward-char
+#&quot;\M-\C-OC&quot;:       forward-char
+#&quot;\M-\C-OA&quot;:       previous-history
+#&quot;\M-\C-OB&quot;:       next-history
+#
+# Arrow keys in 8 bit ANSI mode
+#
+#&quot;\M-\C-[D&quot;:       backward-char
+#&quot;\M-\C-[C&quot;:       forward-char
+#&quot;\M-\C-[A&quot;:       previous-history
+#&quot;\M-\C-[B&quot;:       next-history
+
+C-q: quoted-insert
+
+$endif
+
+# An old-style binding.  This happens to be the default.
+TAB: complete
+
+# Macros that are convenient for shell interaction
+$if Bash
+# edit the path
+&quot;\C-xp&quot;: &quot;PATH=${PATH}\e\C-e\C-a\ef\C-f&quot;
+# prepare to type a quoted word --
+# insert open and close double quotes
+# and move to just after the open quote
+&quot;\C-x\&quot;&quot;: &quot;\&quot;\&quot;\C-b&quot;
+# insert a backslash (testing backslash escapes
+# in sequences and macros)
+&quot;\C-x\\&quot;: &quot;\\&quot;
+# Quote the current or previous word
+&quot;\C-xq&quot;: &quot;\eb\&quot;\ef\&quot;&quot;
+# Add a binding to refresh the line, which is unbound
+&quot;\C-xr&quot;: redraw-current-line
+# Edit variable on current line.
+&quot;\M-\C-v&quot;: &quot;\C-a\C-k$\C-y\M-\C-e\C-a\C-y=&quot;
+$endif
+
+# use a visible bell if one is available
+set bell-style visible
+
+# don't strip characters to 7 bits when reading
+set input-meta on
+
+# allow iso-latin1 characters to be inserted rather
+# than converted to prefix-meta sequences
+set convert-meta off
+
+# display characters with the eighth bit set directly
+# rather than as meta-prefixed characters
+set output-meta on
+
+# if there are 150 or more possible completions for a word,
+# ask whether or not the user wants to see all of them
+set completion-query-items 150
+
+# For FTP
+$if Ftp
+&quot;\C-xg&quot;: &quot;get \M-?&quot;
+&quot;\C-xt&quot;: &quot;put \M-?&quot;
+&quot;\M-.&quot;: yank-last-arg
+$endif
+</pre></div>
+
+<hr>
+</div>
+</div>
+<div class="section" id="Bindable-Readline-Commands">
+<div class="header">
+<p>
+Next: <a href="#Readline-vi-Mode" accesskey="n" rel="next">Readline vi Mode</a>, Previous: <a href="#Readline-Init-File" accesskey="p" rel="prev">Readline Init File</a>, Up: <a href="#Command-Line-Editing" accesskey="u" rel="up">Command Line Editing</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Bindable-Readline-Commands-1"></span><h3 class="section">1.4 Bindable Readline Commands</h3>
+
+
+<p>This section describes Readline commands that may be bound to key
+sequences.
+Command names without an accompanying key sequence are unbound by default.
+</p>
+<p>In the following descriptions, <em>point</em> refers to the current cursor
+position, and <em>mark</em> refers to a cursor position saved by the
+<code>set-mark</code> command.
+The text between the point and mark is referred to as the <em>region</em>.
+</p>
+<ul class="section-toc">
+<li><a href="#Commands-For-Moving" accesskey="1">Commands For Moving</a></li>
+<li><a href="#Commands-For-History" accesskey="2">Commands For Manipulating The History</a></li>
+<li><a href="#Commands-For-Text" accesskey="3">Commands For Changing Text</a></li>
+<li><a href="#Commands-For-Killing" accesskey="4">Killing And Yanking</a></li>
+<li><a href="#Numeric-Arguments" accesskey="5">Specifying Numeric Arguments</a></li>
+<li><a href="#Commands-For-Completion" accesskey="6">Letting Readline Type For You</a></li>
+<li><a href="#Keyboard-Macros" accesskey="7">Keyboard Macros</a></li>
+<li><a href="#Miscellaneous-Commands" accesskey="8">Some Miscellaneous Commands</a></li>
+</ul>
+<hr>
+<div class="subsection" id="Commands-For-Moving">
+<div class="header">
+<p>
+Next: <a href="#Commands-For-History" accesskey="n" rel="next">Commands For Manipulating The History</a>, Up: <a href="#Bindable-Readline-Commands" accesskey="u" rel="up">Bindable Readline Commands</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Commands-For-Moving-1"></span><h4 class="subsection">1.4.1 Commands For Moving</h4>
+<dl compact="compact">
+<dt id='index-beginning_002dof_002dline-_0028C_002da_0029'><span><code>beginning-of-line (C-a)</code><a href='#index-beginning_002dof_002dline-_0028C_002da_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Move to the start of the current line.
+</p>
+</dd>
+<dt id='index-end_002dof_002dline-_0028C_002de_0029'><span><code>end-of-line (C-e)</code><a href='#index-end_002dof_002dline-_0028C_002de_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Move to the end of the line.
+</p>
+</dd>
+<dt id='index-forward_002dchar-_0028C_002df_0029'><span><code>forward-char (C-f)</code><a href='#index-forward_002dchar-_0028C_002df_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Move forward a character.
+</p>
+</dd>
+<dt id='index-backward_002dchar-_0028C_002db_0029'><span><code>backward-char (C-b)</code><a href='#index-backward_002dchar-_0028C_002db_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Move back a character.
+</p>
+</dd>
+<dt id='index-forward_002dword-_0028M_002df_0029'><span><code>forward-word (M-f)</code><a href='#index-forward_002dword-_0028M_002df_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Move forward to the end of the next word.
+Words are composed of letters and digits.
+</p>
+</dd>
+<dt id='index-backward_002dword-_0028M_002db_0029'><span><code>backward-word (M-b)</code><a href='#index-backward_002dword-_0028M_002db_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Move back to the start of the current or previous word.
+Words are composed of letters and digits.
+</p>
+
+</dd>
+<dt id='index-previous_002dscreen_002dline-_0028_0029'><span><code>previous-screen-line ()</code><a href='#index-previous_002dscreen_002dline-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Attempt to move point to the same physical screen column on the previous
+physical screen line. This will not have the desired effect if the current
+Readline line does not take up more than one physical line or if point is not
+greater than the length of the prompt plus the screen width.
+</p>
+</dd>
+<dt id='index-next_002dscreen_002dline-_0028_0029'><span><code>next-screen-line ()</code><a href='#index-next_002dscreen_002dline-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Attempt to move point to the same physical screen column on the next
+physical screen line. This will not have the desired effect if the current
+Readline line does not take up more than one physical line or if the length
+of the current Readline line is not greater than the length of the prompt
+plus the screen width.
+</p>
+</dd>
+<dt id='index-clear_002ddisplay-_0028M_002dC_002dl_0029'><span><code>clear-display (M-C-l)</code><a href='#index-clear_002ddisplay-_0028M_002dC_002dl_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Clear the screen and, if possible, the terminal&rsquo;s scrollback buffer,
+then redraw the current line,
+leaving the current line at the top of the screen.
+</p>
+</dd>
+<dt id='index-clear_002dscreen-_0028C_002dl_0029'><span><code>clear-screen (C-l)</code><a href='#index-clear_002dscreen-_0028C_002dl_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Clear the screen,
+then redraw the current line,
+leaving the current line at the top of the screen.
+</p>
+</dd>
+<dt id='index-redraw_002dcurrent_002dline-_0028_0029'><span><code>redraw-current-line ()</code><a href='#index-redraw_002dcurrent_002dline-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Refresh the current line.  By default, this is unbound.
+</p>
+</dd>
+</dl>
+
+<hr>
+</div>
+<div class="subsection" id="Commands-For-History">
+<div class="header">
+<p>
+Next: <a href="#Commands-For-Text" accesskey="n" rel="next">Commands For Changing Text</a>, Previous: <a href="#Commands-For-Moving" accesskey="p" rel="prev">Commands For Moving</a>, Up: <a href="#Bindable-Readline-Commands" accesskey="u" rel="up">Bindable Readline Commands</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Commands-For-Manipulating-The-History"></span><h4 class="subsection">1.4.2 Commands For Manipulating The History</h4>
+
+<dl compact="compact">
+<dt id='index-accept_002dline-_0028Newline-or-Return_0029'><span><code>accept-line (Newline or Return)</code><a href='#index-accept_002dline-_0028Newline-or-Return_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Accept the line regardless of where the cursor is.
+If this line is
+non-empty, it may be added to the history list for future recall with
+<code>add_history()</code>.
+If this line is a modified history line, the history line is restored
+to its original state.
+</p>
+</dd>
+<dt id='index-previous_002dhistory-_0028C_002dp_0029'><span><code>previous-history (C-p)</code><a href='#index-previous_002dhistory-_0028C_002dp_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Move &lsquo;back&rsquo; through the history list, fetching the previous command.
+</p>
+</dd>
+<dt id='index-next_002dhistory-_0028C_002dn_0029'><span><code>next-history (C-n)</code><a href='#index-next_002dhistory-_0028C_002dn_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Move &lsquo;forward&rsquo; through the history list, fetching the next command.
+</p>
+</dd>
+<dt id='index-beginning_002dof_002dhistory-_0028M_002d_003c_0029'><span><code>beginning-of-history (M-&lt;)</code><a href='#index-beginning_002dof_002dhistory-_0028M_002d_003c_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Move to the first line in the history.
+</p>
+</dd>
+<dt id='index-end_002dof_002dhistory-_0028M_002d_003e_0029'><span><code>end-of-history (M-&gt;)</code><a href='#index-end_002dof_002dhistory-_0028M_002d_003e_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Move to the end of the input history, i.e., the line currently
+being entered.
+</p>
+</dd>
+<dt id='index-reverse_002dsearch_002dhistory-_0028C_002dr_0029'><span><code>reverse-search-history (C-r)</code><a href='#index-reverse_002dsearch_002dhistory-_0028C_002dr_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Search backward starting at the current line and moving &lsquo;up&rsquo; through
+the history as necessary.  This is an incremental search.
+This command sets the region to the matched text and activates the mark.
+</p>
+</dd>
+<dt id='index-forward_002dsearch_002dhistory-_0028C_002ds_0029'><span><code>forward-search-history (C-s)</code><a href='#index-forward_002dsearch_002dhistory-_0028C_002ds_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Search forward starting at the current line and moving &lsquo;down&rsquo; through
+the history as necessary.  This is an incremental search.
+This command sets the region to the matched text and activates the mark.
+</p>
+</dd>
+<dt id='index-non_002dincremental_002dreverse_002dsearch_002dhistory-_0028M_002dp_0029'><span><code>non-incremental-reverse-search-history (M-p)</code><a href='#index-non_002dincremental_002dreverse_002dsearch_002dhistory-_0028M_002dp_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Search backward starting at the current line and moving &lsquo;up&rsquo;
+through the history as necessary using a non-incremental search
+for a string supplied by the user.
+The search string may match anywhere in a history line.
+</p>
+</dd>
+<dt id='index-non_002dincremental_002dforward_002dsearch_002dhistory-_0028M_002dn_0029'><span><code>non-incremental-forward-search-history (M-n)</code><a href='#index-non_002dincremental_002dforward_002dsearch_002dhistory-_0028M_002dn_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Search forward starting at the current line and moving &lsquo;down&rsquo;
+through the history as necessary using a non-incremental search
+for a string supplied by the user.
+The search string may match anywhere in a history line.
+</p>
+</dd>
+<dt id='index-history_002dsearch_002dforward-_0028_0029'><span><code>history-search-forward ()</code><a href='#index-history_002dsearch_002dforward-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Search forward through the history for the string of characters
+between the start of the current line and the point.
+The search string must match at the beginning of a history line.
+This is a non-incremental search.
+By default, this command is unbound.
+</p>
+</dd>
+<dt id='index-history_002dsearch_002dbackward-_0028_0029'><span><code>history-search-backward ()</code><a href='#index-history_002dsearch_002dbackward-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Search backward through the history for the string of characters
+between the start of the current line and the point.
+The search string must match at the beginning of a history line.
+This is a non-incremental search.
+By default, this command is unbound.
+</p>
+</dd>
+<dt id='index-history_002dsubstring_002dsearch_002dforward-_0028_0029'><span><code>history-substring-search-forward ()</code><a href='#index-history_002dsubstring_002dsearch_002dforward-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Search forward through the history for the string of characters
+between the start of the current line and the point.
+The search string may match anywhere in a history line.
+This is a non-incremental search.
+By default, this command is unbound.
+</p>
+</dd>
+<dt id='index-history_002dsubstring_002dsearch_002dbackward-_0028_0029'><span><code>history-substring-search-backward ()</code><a href='#index-history_002dsubstring_002dsearch_002dbackward-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Search backward through the history for the string of characters
+between the start of the current line and the point.
+The search string may match anywhere in a history line.
+This is a non-incremental search.
+By default, this command is unbound.
+</p>
+</dd>
+<dt id='index-yank_002dnth_002darg-_0028M_002dC_002dy_0029'><span><code>yank-nth-arg (M-C-y)</code><a href='#index-yank_002dnth_002darg-_0028M_002dC_002dy_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Insert the first argument to the previous command (usually
+the second word on the previous line) at point.
+With an argument <var>n</var>,
+insert the <var>n</var>th word from the previous command (the words
+in the previous command begin with word 0).  A negative argument
+inserts the <var>n</var>th word from the end of the previous command.
+Once the argument <var>n</var> is computed, the argument is extracted
+as if the &lsquo;<samp>!<var>n</var></samp>&rsquo; history expansion had been specified.
+</p>
+</dd>
+<dt id='index-yank_002dlast_002darg-_0028M_002d_002e-or-M_002d_005f_0029'><span><code>yank-last-arg (M-. or M-_)</code><a href='#index-yank_002dlast_002darg-_0028M_002d_002e-or-M_002d_005f_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Insert last argument to the previous command (the last word of the
+previous history entry).
+With a numeric argument, behave exactly like <code>yank-nth-arg</code>.
+Successive calls to <code>yank-last-arg</code> move back through the history
+list, inserting the last word (or the word specified by the argument to
+the first call) of each line in turn.
+Any numeric argument supplied to these successive calls determines
+the direction to move through the history.  A negative argument switches
+the direction through the history (back or forward).
+The history expansion facilities are used to extract the last argument,
+as if the &lsquo;<samp>!$</samp>&rsquo; history expansion had been specified.
+</p>
+</dd>
+<dt id='index-operate_002dand_002dget_002dnext-_0028C_002do_0029'><span><code>operate-and-get-next (C-o)</code><a href='#index-operate_002dand_002dget_002dnext-_0028C_002do_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Accept the current line for return to the calling application as if a
+newline had been entered,
+and fetch the next line relative to the current line from the history
+for editing.
+A numeric argument, if supplied, specifies the history entry to use instead
+of the current line.
+</p>
+</dd>
+<dt id='index-fetch_002dhistory-_0028_0029'><span><code>fetch-history ()</code><a href='#index-fetch_002dhistory-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>With a numeric argument, fetch that entry from the history list
+and make it the current line.
+Without an argument, move back to the first entry in the history list.
+</p>
+</dd>
+</dl>
+
+<hr>
+</div>
+<div class="subsection" id="Commands-For-Text">
+<div class="header">
+<p>
+Next: <a href="#Commands-For-Killing" accesskey="n" rel="next">Killing And Yanking</a>, Previous: <a href="#Commands-For-History" accesskey="p" rel="prev">Commands For Manipulating The History</a>, Up: <a href="#Bindable-Readline-Commands" accesskey="u" rel="up">Bindable Readline Commands</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Commands-For-Changing-Text"></span><h4 class="subsection">1.4.3 Commands For Changing Text</h4>
+
+<dl compact="compact">
+<dt id='index-end_002dof_002dfile-_0028usually-C_002dd_0029'><span><code><i>end-of-file</i> (usually C-d)</code><a href='#index-end_002dof_002dfile-_0028usually-C_002dd_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The character indicating end-of-file as set, for example, by
+<code>stty</code>.  If this character is read when there are no characters
+on the line, and point is at the beginning of the line, Readline
+interprets it as the end of input and returns <small>EOF</small>.
+</p>
+</dd>
+<dt id='index-delete_002dchar-_0028C_002dd_0029'><span><code>delete-char (C-d)</code><a href='#index-delete_002dchar-_0028C_002dd_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Delete the character at point.  If this function is bound to the
+same character as the tty <small>EOF</small> character, as <kbd>C-d</kbd>
+commonly is, see above for the effects.
+</p>
+</dd>
+<dt id='index-backward_002ddelete_002dchar-_0028Rubout_0029'><span><code>backward-delete-char (Rubout)</code><a href='#index-backward_002ddelete_002dchar-_0028Rubout_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Delete the character behind the cursor.  A numeric argument means
+to kill the characters instead of deleting them.
+</p>
+</dd>
+<dt id='index-forward_002dbackward_002ddelete_002dchar-_0028_0029'><span><code>forward-backward-delete-char ()</code><a href='#index-forward_002dbackward_002ddelete_002dchar-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Delete the character under the cursor, unless the cursor is at the
+end of the line, in which case the character behind the cursor is
+deleted.  By default, this is not bound to a key.
+</p>
+</dd>
+<dt id='index-quoted_002dinsert-_0028C_002dq-or-C_002dv_0029'><span><code>quoted-insert (C-q or C-v)</code><a href='#index-quoted_002dinsert-_0028C_002dq-or-C_002dv_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Add the next character typed to the line verbatim.  This is
+how to insert key sequences like <kbd>C-q</kbd>, for example.
+</p>
+</dd>
+<dt id='index-tab_002dinsert-_0028M_002dTAB_0029'><span><code>tab-insert (M-<span class="key">TAB</span>)</code><a href='#index-tab_002dinsert-_0028M_002dTAB_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Insert a tab character.
+</p>
+</dd>
+<dt id='index-self_002dinsert-_0028a_002c-b_002c-A_002c-1_002c-_0021_002c-_2026_0029'><span><code>self-insert (a, b, A, 1, !, &hellip;)</code><a href='#index-self_002dinsert-_0028a_002c-b_002c-A_002c-1_002c-_0021_002c-_2026_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Insert yourself.
+</p>
+</dd>
+<dt id='index-bracketed_002dpaste_002dbegin-_0028_0029'><span><code>bracketed-paste-begin ()</code><a href='#index-bracketed_002dpaste_002dbegin-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>This function is intended to be bound to the &quot;bracketed paste&quot; escape
+sequence sent by some terminals, and such a binding is assigned by default.
+It allows Readline to insert the pasted text as a single unit without treating
+each character as if it had been read from the keyboard.  The characters
+are inserted as if each one was bound to <code>self-insert</code> instead of
+executing any editing commands.
+</p>
+<p>Bracketed paste sets the region (the characters between point and the mark)
+to the inserted text. It uses the concept of an <em>active mark</em>: when the
+mark is active, Readline redisplay uses the terminal&rsquo;s standout mode to
+denote the region.
+</p>
+</dd>
+<dt id='index-transpose_002dchars-_0028C_002dt_0029'><span><code>transpose-chars (C-t)</code><a href='#index-transpose_002dchars-_0028C_002dt_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Drag the character before the cursor forward over
+the character at the cursor, moving the
+cursor forward as well.  If the insertion point
+is at the end of the line, then this
+transposes the last two characters of the line.
+Negative arguments have no effect.
+</p>
+</dd>
+<dt id='index-transpose_002dwords-_0028M_002dt_0029'><span><code>transpose-words (M-t)</code><a href='#index-transpose_002dwords-_0028M_002dt_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Drag the word before point past the word after point,
+moving point past that word as well.
+If the insertion point is at the end of the line, this transposes
+the last two words on the line.
+</p>
+</dd>
+<dt id='index-upcase_002dword-_0028M_002du_0029'><span><code>upcase-word (M-u)</code><a href='#index-upcase_002dword-_0028M_002du_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Uppercase the current (or following) word.  With a negative argument,
+uppercase the previous word, but do not move the cursor.
+</p>
+</dd>
+<dt id='index-downcase_002dword-_0028M_002dl_0029'><span><code>downcase-word (M-l)</code><a href='#index-downcase_002dword-_0028M_002dl_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Lowercase the current (or following) word.  With a negative argument,
+lowercase the previous word, but do not move the cursor.
+</p>
+</dd>
+<dt id='index-capitalize_002dword-_0028M_002dc_0029'><span><code>capitalize-word (M-c)</code><a href='#index-capitalize_002dword-_0028M_002dc_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Capitalize the current (or following) word.  With a negative argument,
+capitalize the previous word, but do not move the cursor.
+</p>
+</dd>
+<dt id='index-overwrite_002dmode-_0028_0029'><span><code>overwrite-mode ()</code><a href='#index-overwrite_002dmode-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Toggle overwrite mode.  With an explicit positive numeric argument,
+switches to overwrite mode.  With an explicit non-positive numeric
+argument, switches to insert mode.  This command affects only
+<code>emacs</code> mode; <code>vi</code> mode does overwrite differently.
+Each call to <code>readline()</code> starts in insert mode.
+</p>
+<p>In overwrite mode, characters bound to <code>self-insert</code> replace
+the text at point rather than pushing the text to the right.
+Characters bound to <code>backward-delete-char</code> replace the character
+before point with a space.
+</p>
+<p>By default, this command is unbound.
+</p>
+</dd>
+</dl>
+
+<hr>
+</div>
+<div class="subsection" id="Commands-For-Killing">
+<div class="header">
+<p>
+Next: <a href="#Numeric-Arguments" accesskey="n" rel="next">Specifying Numeric Arguments</a>, Previous: <a href="#Commands-For-Text" accesskey="p" rel="prev">Commands For Changing Text</a>, Up: <a href="#Bindable-Readline-Commands" accesskey="u" rel="up">Bindable Readline Commands</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Killing-And-Yanking"></span><h4 class="subsection">1.4.4 Killing And Yanking</h4>
+
+<dl compact="compact">
+<dt id='index-kill_002dline-_0028C_002dk_0029'><span><code>kill-line (C-k)</code><a href='#index-kill_002dline-_0028C_002dk_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Kill the text from point to the end of the line.
+With a negative numeric argument, kill backward from the cursor to the
+beginning of the current line.
+</p>
+</dd>
+<dt id='index-backward_002dkill_002dline-_0028C_002dx-Rubout_0029'><span><code>backward-kill-line (C-x Rubout)</code><a href='#index-backward_002dkill_002dline-_0028C_002dx-Rubout_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Kill backward from the cursor to the beginning of the current line.
+With a negative numeric argument, kill forward from the cursor to the
+end of the current line.
+</p>
+</dd>
+<dt id='index-unix_002dline_002ddiscard-_0028C_002du_0029'><span><code>unix-line-discard (C-u)</code><a href='#index-unix_002dline_002ddiscard-_0028C_002du_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Kill backward from the cursor to the beginning of the current line.
+</p>
+</dd>
+<dt id='index-kill_002dwhole_002dline-_0028_0029'><span><code>kill-whole-line ()</code><a href='#index-kill_002dwhole_002dline-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Kill all characters on the current line, no matter where point is.
+By default, this is unbound.
+</p>
+</dd>
+<dt id='index-kill_002dword-_0028M_002dd_0029'><span><code>kill-word (M-d)</code><a href='#index-kill_002dword-_0028M_002dd_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Kill from point to the end of the current word, or if between
+words, to the end of the next word.
+Word boundaries are the same as <code>forward-word</code>.
+</p>
+</dd>
+<dt id='index-backward_002dkill_002dword-_0028M_002dDEL_0029'><span><code>backward-kill-word (M-<span class="key">DEL</span>)</code><a href='#index-backward_002dkill_002dword-_0028M_002dDEL_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Kill the word behind point.
+Word boundaries are the same as <code>backward-word</code>.
+</p>
+
+</dd>
+<dt id='index-shell_002dtranspose_002dwords-_0028M_002dC_002dt_0029'><span><code>shell-transpose-words (M-C-t)</code><a href='#index-shell_002dtranspose_002dwords-_0028M_002dC_002dt_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Drag the word before point past the word after point,
+moving point past that word as well.
+If the insertion point is at the end of the line, this transposes
+the last two words on the line.
+Word boundaries are the same as <code>shell-forward-word</code> and
+<code>shell-backward-word</code>.
+</p>
+</dd>
+<dt id='index-unix_002dword_002drubout-_0028C_002dw_0029'><span><code>unix-word-rubout (C-w)</code><a href='#index-unix_002dword_002drubout-_0028C_002dw_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Kill the word behind point, using white space as a word boundary.
+The killed text is saved on the kill-ring.
+</p>
+</dd>
+<dt id='index-unix_002dfilename_002drubout-_0028_0029'><span><code>unix-filename-rubout ()</code><a href='#index-unix_002dfilename_002drubout-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Kill the word behind point, using white space and the slash character
+as the word boundaries.
+The killed text is saved on the kill-ring.
+</p>
+</dd>
+<dt id='index-delete_002dhorizontal_002dspace-_0028_0029'><span><code>delete-horizontal-space ()</code><a href='#index-delete_002dhorizontal_002dspace-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Delete all spaces and tabs around point.  By default, this is unbound.
+</p>
+</dd>
+<dt id='index-kill_002dregion-_0028_0029'><span><code>kill-region ()</code><a href='#index-kill_002dregion-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Kill the text in the current region.
+By default, this command is unbound.
+</p>
+</dd>
+<dt id='index-copy_002dregion_002das_002dkill-_0028_0029'><span><code>copy-region-as-kill ()</code><a href='#index-copy_002dregion_002das_002dkill-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Copy the text in the region to the kill buffer, so it can be yanked
+right away.  By default, this command is unbound.
+</p>
+</dd>
+<dt id='index-copy_002dbackward_002dword-_0028_0029'><span><code>copy-backward-word ()</code><a href='#index-copy_002dbackward_002dword-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Copy the word before point to the kill buffer.
+The word boundaries are the same as <code>backward-word</code>.
+By default, this command is unbound.
+</p>
+</dd>
+<dt id='index-copy_002dforward_002dword-_0028_0029'><span><code>copy-forward-word ()</code><a href='#index-copy_002dforward_002dword-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Copy the word following point to the kill buffer.
+The word boundaries are the same as <code>forward-word</code>.
+By default, this command is unbound.
+</p>
+</dd>
+<dt id='index-yank-_0028C_002dy_0029'><span><code>yank (C-y)</code><a href='#index-yank-_0028C_002dy_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Yank the top of the kill ring into the buffer at point.
+</p>
+</dd>
+<dt id='index-yank_002dpop-_0028M_002dy_0029'><span><code>yank-pop (M-y)</code><a href='#index-yank_002dpop-_0028M_002dy_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Rotate the kill-ring, and yank the new top.  You can only do this if
+the prior command is <code>yank</code> or <code>yank-pop</code>.
+</p></dd>
+</dl>
+
+<hr>
+</div>
+<div class="subsection" id="Numeric-Arguments">
+<div class="header">
+<p>
+Next: <a href="#Commands-For-Completion" accesskey="n" rel="next">Letting Readline Type For You</a>, Previous: <a href="#Commands-For-Killing" accesskey="p" rel="prev">Killing And Yanking</a>, Up: <a href="#Bindable-Readline-Commands" accesskey="u" rel="up">Bindable Readline Commands</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Specifying-Numeric-Arguments"></span><h4 class="subsection">1.4.5 Specifying Numeric Arguments</h4>
+<dl compact="compact">
+<dt id='index-digit_002dargument-_0028M_002d0_002c-M_002d1_002c-_2026-M_002d_002d_0029'><span><code>digit-argument (<kbd>M-0</kbd>, <kbd>M-1</kbd>, &hellip; <kbd>M--</kbd>)</code><a href='#index-digit_002dargument-_0028M_002d0_002c-M_002d1_002c-_2026-M_002d_002d_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Add this digit to the argument already accumulating, or start a new
+argument.  <kbd>M--</kbd> starts a negative argument.
+</p>
+</dd>
+<dt id='index-universal_002dargument-_0028_0029'><span><code>universal-argument ()</code><a href='#index-universal_002dargument-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>This is another way to specify an argument.
+If this command is followed by one or more digits, optionally with a
+leading minus sign, those digits define the argument.
+If the command is followed by digits, executing <code>universal-argument</code>
+again ends the numeric argument, but is otherwise ignored.
+As a special case, if this command is immediately followed by a
+character that is neither a digit nor minus sign, the argument count
+for the next command is multiplied by four.
+The argument count is initially one, so executing this function the
+first time makes the argument count four, a second time makes the
+argument count sixteen, and so on.
+By default, this is not bound to a key.
+</p></dd>
+</dl>
+
+<hr>
+</div>
+<div class="subsection" id="Commands-For-Completion">
+<div class="header">
+<p>
+Next: <a href="#Keyboard-Macros" accesskey="n" rel="next">Keyboard Macros</a>, Previous: <a href="#Numeric-Arguments" accesskey="p" rel="prev">Specifying Numeric Arguments</a>, Up: <a href="#Bindable-Readline-Commands" accesskey="u" rel="up">Bindable Readline Commands</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Letting-Readline-Type-For-You"></span><h4 class="subsection">1.4.6 Letting Readline Type For You</h4>
+
+<dl compact="compact">
+<dt id='index-complete-_0028TAB_0029'><span><code>complete (<span class="key">TAB</span>)</code><a href='#index-complete-_0028TAB_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Attempt to perform completion on the text before point.
+The actual completion performed is application-specific.
+The default is filename completion.
+</p>
+</dd>
+<dt id='index-possible_002dcompletions-_0028M_002d_003f_0029'><span><code>possible-completions (M-?)</code><a href='#index-possible_002dcompletions-_0028M_002d_003f_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>List the possible completions of the text before point.
+When displaying completions, Readline sets the number of columns used
+for display to the value of <code>completion-display-width</code>, the value of
+the environment variable <code>COLUMNS</code>, or the screen width, in that order.
+</p>
+</dd>
+<dt id='index-insert_002dcompletions-_0028M_002d_002a_0029'><span><code>insert-completions (M-*)</code><a href='#index-insert_002dcompletions-_0028M_002d_002a_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Insert all completions of the text before point that would have
+been generated by <code>possible-completions</code>.
+</p>
+</dd>
+<dt id='index-menu_002dcomplete-_0028_0029'><span><code>menu-complete ()</code><a href='#index-menu_002dcomplete-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Similar to <code>complete</code>, but replaces the word to be completed
+with a single match from the list of possible completions.
+Repeated execution of <code>menu-complete</code> steps through the list
+of possible completions, inserting each match in turn.
+At the end of the list of completions, the bell is rung
+(subject to the setting of <code>bell-style</code>)
+and the original text is restored.
+An argument of <var>n</var> moves <var>n</var> positions forward in the list
+of matches; a negative argument may be used to move backward
+through the list.
+This command is intended to be bound to <tt class="key">TAB</tt>, but is unbound
+by default.
+</p>
+</dd>
+<dt id='index-menu_002dcomplete_002dbackward-_0028_0029'><span><code>menu-complete-backward ()</code><a href='#index-menu_002dcomplete_002dbackward-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Identical to <code>menu-complete</code>, but moves backward through the list
+of possible completions, as if <code>menu-complete</code> had been given a
+negative argument.
+</p>
+</dd>
+<dt id='index-delete_002dchar_002dor_002dlist-_0028_0029'><span><code>delete-char-or-list ()</code><a href='#index-delete_002dchar_002dor_002dlist-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Deletes the character under the cursor if not at the beginning or
+end of the line (like <code>delete-char</code>).
+If at the end of the line, behaves identically to
+<code>possible-completions</code>.
+This command is unbound by default.
+</p>
+</dd>
+</dl>
+
+<hr>
+</div>
+<div class="subsection" id="Keyboard-Macros">
+<div class="header">
+<p>
+Next: <a href="#Miscellaneous-Commands" accesskey="n" rel="next">Some Miscellaneous Commands</a>, Previous: <a href="#Commands-For-Completion" accesskey="p" rel="prev">Letting Readline Type For You</a>, Up: <a href="#Bindable-Readline-Commands" accesskey="u" rel="up">Bindable Readline Commands</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Keyboard-Macros-1"></span><h4 class="subsection">1.4.7 Keyboard Macros</h4>
+<dl compact="compact">
+<dt id='index-start_002dkbd_002dmacro-_0028C_002dx-_0028_0029'><span><code>start-kbd-macro (C-x ()</code><a href='#index-start_002dkbd_002dmacro-_0028C_002dx-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Begin saving the characters typed into the current keyboard macro.
+</p>
+</dd>
+<dt id='index-end_002dkbd_002dmacro-_0028C_002dx-_0029_0029'><span><code>end-kbd-macro (C-x ))</code><a href='#index-end_002dkbd_002dmacro-_0028C_002dx-_0029_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Stop saving the characters typed into the current keyboard macro
+and save the definition.
+</p>
+</dd>
+<dt id='index-call_002dlast_002dkbd_002dmacro-_0028C_002dx-e_0029'><span><code>call-last-kbd-macro (C-x e)</code><a href='#index-call_002dlast_002dkbd_002dmacro-_0028C_002dx-e_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Re-execute the last keyboard macro defined, by making the characters
+in the macro appear as if typed at the keyboard.
+</p>
+</dd>
+<dt id='index-print_002dlast_002dkbd_002dmacro-_0028_0029'><span><code>print-last-kbd-macro ()</code><a href='#index-print_002dlast_002dkbd_002dmacro-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Print the last keyboard macro defined in a format suitable for the
+<var>inputrc</var> file.
+</p>
+</dd>
+</dl>
+
+<hr>
+</div>
+<div class="subsection" id="Miscellaneous-Commands">
+<div class="header">
+<p>
+Previous: <a href="#Keyboard-Macros" accesskey="p" rel="prev">Keyboard Macros</a>, Up: <a href="#Bindable-Readline-Commands" accesskey="u" rel="up">Bindable Readline Commands</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Some-Miscellaneous-Commands"></span><h4 class="subsection">1.4.8 Some Miscellaneous Commands</h4>
+<dl compact="compact">
+<dt id='index-re_002dread_002dinit_002dfile-_0028C_002dx-C_002dr_0029'><span><code>re-read-init-file (C-x C-r)</code><a href='#index-re_002dread_002dinit_002dfile-_0028C_002dx-C_002dr_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Read in the contents of the <var>inputrc</var> file, and incorporate
+any bindings or variable assignments found there.
+</p>
+</dd>
+<dt id='index-abort-_0028C_002dg_0029'><span><code>abort (C-g)</code><a href='#index-abort-_0028C_002dg_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Abort the current editing command and
+ring the terminal&rsquo;s bell (subject to the setting of
+<code>bell-style</code>).
+</p>
+</dd>
+<dt id='index-do_002dlowercase_002dversion-_0028M_002dA_002c-M_002dB_002c-M_002dx_002c-_2026_0029'><span><code>do-lowercase-version (M-A, M-B, M-<var>x</var>, &hellip;)</code><a href='#index-do_002dlowercase_002dversion-_0028M_002dA_002c-M_002dB_002c-M_002dx_002c-_2026_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>If the metafied character <var>x</var> is upper case, run the command
+that is bound to the corresponding metafied lower case character.
+The behavior is undefined if <var>x</var> is already lower case.
+</p>
+</dd>
+<dt id='index-prefix_002dmeta-_0028ESC_0029'><span><code>prefix-meta (<span class="key">ESC</span>)</code><a href='#index-prefix_002dmeta-_0028ESC_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Metafy the next character typed.  This is for keyboards
+without a meta key.  Typing &lsquo;<samp><span class="key">ESC</span> f</samp>&rsquo; is equivalent to typing
+<kbd>M-f</kbd>.
+</p>
+</dd>
+<dt id='index-undo-_0028C_002d_005f-or-C_002dx-C_002du_0029'><span><code>undo (C-_ or C-x C-u)</code><a href='#index-undo-_0028C_002d_005f-or-C_002dx-C_002du_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Incremental undo, separately remembered for each line.
+</p>
+</dd>
+<dt id='index-revert_002dline-_0028M_002dr_0029'><span><code>revert-line (M-r)</code><a href='#index-revert_002dline-_0028M_002dr_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Undo all changes made to this line.  This is like executing the <code>undo</code>
+command enough times to get back to the beginning.
+</p>
+</dd>
+<dt id='index-tilde_002dexpand-_0028M_002d_007e_0029'><span><code>tilde-expand (M-~)</code><a href='#index-tilde_002dexpand-_0028M_002d_007e_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Perform tilde expansion on the current word.
+</p>
+</dd>
+<dt id='index-set_002dmark-_0028C_002d_0040_0029'><span><code>set-mark (C-@)</code><a href='#index-set_002dmark-_0028C_002d_0040_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Set the mark to the point.  If a
+numeric argument is supplied, the mark is set to that position.
+</p>
+</dd>
+<dt id='index-exchange_002dpoint_002dand_002dmark-_0028C_002dx-C_002dx_0029'><span><code>exchange-point-and-mark (C-x C-x)</code><a href='#index-exchange_002dpoint_002dand_002dmark-_0028C_002dx-C_002dx_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Swap the point with the mark.  The current cursor position is set to
+the saved position, and the old cursor position is saved as the mark.
+</p>
+</dd>
+<dt id='index-character_002dsearch-_0028C_002d_005d_0029'><span><code>character-search (C-])</code><a href='#index-character_002dsearch-_0028C_002d_005d_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>A character is read and point is moved to the next occurrence of that
+character.  A negative argument searches for previous occurrences.
+</p>
+</dd>
+<dt id='index-character_002dsearch_002dbackward-_0028M_002dC_002d_005d_0029'><span><code>character-search-backward (M-C-])</code><a href='#index-character_002dsearch_002dbackward-_0028M_002dC_002d_005d_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>A character is read and point is moved to the previous occurrence
+of that character.  A negative argument searches for subsequent
+occurrences.
+</p>
+</dd>
+<dt id='index-skip_002dcsi_002dsequence-_0028_0029'><span><code>skip-csi-sequence ()</code><a href='#index-skip_002dcsi_002dsequence-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Read enough characters to consume a multi-key sequence such as those
+defined for keys like Home and End.  Such sequences begin with a
+Control Sequence Indicator (CSI), usually ESC-[.  If this sequence is
+bound to &quot;\e[&quot;, keys producing such sequences will have no effect
+unless explicitly bound to a Readline command, instead of inserting
+stray characters into the editing buffer.  This is unbound by default,
+but usually bound to ESC-[.
+</p>
+</dd>
+<dt id='index-insert_002dcomment-_0028M_002d_0023_0029'><span><code>insert-comment (M-#)</code><a href='#index-insert_002dcomment-_0028M_002d_0023_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Without a numeric argument, the value of the <code>comment-begin</code>
+variable is inserted at the beginning of the current line.
+If a numeric argument is supplied, this command acts as a toggle:  if
+the characters at the beginning of the line do not match the value
+of <code>comment-begin</code>, the value is inserted, otherwise
+the characters in <code>comment-begin</code> are deleted from the beginning of
+the line.
+In either case, the line is accepted as if a newline had been typed.
+</p>
+</dd>
+<dt id='index-dump_002dfunctions-_0028_0029'><span><code>dump-functions ()</code><a href='#index-dump_002dfunctions-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Print all of the functions and their key bindings to the
+Readline output stream.  If a numeric argument is supplied,
+the output is formatted in such a way that it can be made part
+of an <var>inputrc</var> file.  This command is unbound by default.
+</p>
+</dd>
+<dt id='index-dump_002dvariables-_0028_0029'><span><code>dump-variables ()</code><a href='#index-dump_002dvariables-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Print all of the settable variables and their values to the
+Readline output stream.  If a numeric argument is supplied,
+the output is formatted in such a way that it can be made part
+of an <var>inputrc</var> file.  This command is unbound by default.
+</p>
+</dd>
+<dt id='index-dump_002dmacros-_0028_0029'><span><code>dump-macros ()</code><a href='#index-dump_002dmacros-_0028_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Print all of the Readline key sequences bound to macros and the
+strings they output.  If a numeric argument is supplied,
+the output is formatted in such a way that it can be made part
+of an <var>inputrc</var> file.  This command is unbound by default.
+</p>
+
+</dd>
+<dt id='index-emacs_002dediting_002dmode-_0028C_002de_0029'><span><code>emacs-editing-mode (C-e)</code><a href='#index-emacs_002dediting_002dmode-_0028C_002de_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>When in <code>vi</code> command mode, this causes a switch to <code>emacs</code>
+editing mode.
+</p>
+</dd>
+<dt id='index-vi_002dediting_002dmode-_0028M_002dC_002dj_0029'><span><code>vi-editing-mode (M-C-j)</code><a href='#index-vi_002dediting_002dmode-_0028M_002dC_002dj_0029' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>When in <code>emacs</code> editing mode, this causes a switch to <code>vi</code>
+editing mode.
+</p>
+
+</dd>
+</dl>
+
+<hr>
+</div>
+</div>
+<div class="section" id="Readline-vi-Mode">
+<div class="header">
+<p>
+Previous: <a href="#Bindable-Readline-Commands" accesskey="p" rel="prev">Bindable Readline Commands</a>, Up: <a href="#Command-Line-Editing" accesskey="u" rel="up">Command Line Editing</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="Readline-vi-Mode-1"></span><h3 class="section">1.5 Readline vi Mode</h3>
+
+<p>While the Readline library does not have a full set of <code>vi</code>
+editing functions, it does contain enough to allow simple editing
+of the line.  The Readline <code>vi</code> mode behaves as specified in
+the <small>POSIX</small> standard.
+</p>
+<p>In order to switch interactively between <code>emacs</code> and <code>vi</code>
+editing modes, use the command <kbd>M-C-j</kbd> (bound to emacs-editing-mode
+when in <code>vi</code> mode and to vi-editing-mode in <code>emacs</code> mode).
+The Readline default is <code>emacs</code> mode.
+</p>
+<p>When you enter a line in <code>vi</code> mode, you are already placed in
+&lsquo;insertion&rsquo; mode, as if you had typed an &lsquo;<samp>i</samp>&rsquo;.  Pressing <tt class="key">ESC</tt>
+switches you into &lsquo;command&rsquo; mode, where you can edit the text of the
+line with the standard <code>vi</code> movement keys, move to previous
+history lines with &lsquo;<samp>k</samp>&rsquo; and subsequent lines with &lsquo;<samp>j</samp>&rsquo;, and
+so forth.
+</p>
+
+<hr>
+</div>
+</div>
+<div class="appendix" id="GNU-Free-Documentation-License">
+<div class="header">
+<p>
+Previous: <a href="#Command-Line-Editing" accesskey="p" rel="prev">Command Line Editing</a>, Up: <a href="#Top" accesskey="u" rel="up">GNU Readline Library</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+</div>
+<span id="GNU-Free-Documentation-License-1"></span><h2 class="appendix">Appendix A GNU Free Documentation License</h2>
+
+<div align="center">Version 1.3, 3 November 2008
+</div>
+
+<div class="display">
+<pre class="display">Copyright &copy; 2000, 2001, 2002, 2007, 2008 Free Software Foundation, Inc.
+<a href="http://fsf.org/">http://fsf.org/</a>
+
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
+</pre></div>
+
+<ol start="0">
+<li> PREAMBLE
+
+<p>The purpose of this License is to make a manual, textbook, or other
+functional and useful document <em>free</em> in the sense of freedom: to
+assure everyone the effective freedom to copy and redistribute it,
+with or without modifying it, either commercially or noncommercially.
+Secondarily, this License preserves for the author and publisher a way
+to get credit for their work, while not being considered responsible
+for modifications made by others.
+</p>
+<p>This License is a kind of &ldquo;copyleft&rdquo;, which means that derivative
+works of the document must themselves be free in the same sense.  It
+complements the GNU General Public License, which is a copyleft
+license designed for free software.
+</p>
+<p>We have designed this License in order to use it for manuals for free
+software, because free software needs free documentation: a free
+program should come with manuals providing the same freedoms that the
+software does.  But this License is not limited to software manuals;
+it can be used for any textual work, regardless of subject matter or
+whether it is published as a printed book.  We recommend this License
+principally for works whose purpose is instruction or reference.
+</p>
+</li><li> APPLICABILITY AND DEFINITIONS
+
+<p>This License applies to any manual or other work, in any medium, that
+contains a notice placed by the copyright holder saying it can be
+distributed under the terms of this License.  Such a notice grants a
+world-wide, royalty-free license, unlimited in duration, to use that
+work under the conditions stated herein.  The &ldquo;Document&rdquo;, below,
+refers to any such manual or work.  Any member of the public is a
+licensee, and is addressed as &ldquo;you&rdquo;.  You accept the license if you
+copy, modify or distribute the work in a way requiring permission
+under copyright law.
+</p>
+<p>A &ldquo;Modified Version&rdquo; of the Document means any work containing the
+Document or a portion of it, either copied verbatim, or with
+modifications and/or translated into another language.
+</p>
+<p>A &ldquo;Secondary Section&rdquo; is a named appendix or a front-matter section
+of the Document that deals exclusively with the relationship of the
+publishers or authors of the Document to the Document&rsquo;s overall
+subject (or to related matters) and contains nothing that could fall
+directly within that overall subject.  (Thus, if the Document is in
+part a textbook of mathematics, a Secondary Section may not explain
+any mathematics.)  The relationship could be a matter of historical
+connection with the subject or with related matters, or of legal,
+commercial, philosophical, ethical or political position regarding
+them.
+</p>
+<p>The &ldquo;Invariant Sections&rdquo; are certain Secondary Sections whose titles
+are designated, as being those of Invariant Sections, in the notice
+that says that the Document is released under this License.  If a
+section does not fit the above definition of Secondary then it is not
+allowed to be designated as Invariant.  The Document may contain zero
+Invariant Sections.  If the Document does not identify any Invariant
+Sections then there are none.
+</p>
+<p>The &ldquo;Cover Texts&rdquo; are certain short passages of text that are listed,
+as Front-Cover Texts or Back-Cover Texts, in the notice that says that
+the Document is released under this License.  A Front-Cover Text may
+be at most 5 words, and a Back-Cover Text may be at most 25 words.
+</p>
+<p>A &ldquo;Transparent&rdquo; copy of the Document means a machine-readable copy,
+represented in a format whose specification is available to the
+general public, that is suitable for revising the document
+straightforwardly with generic text editors or (for images composed of
+pixels) generic paint programs or (for drawings) some widely available
+drawing editor, and that is suitable for input to text formatters or
+for automatic translation to a variety of formats suitable for input
+to text formatters.  A copy made in an otherwise Transparent file
+format whose markup, or absence of markup, has been arranged to thwart
+or discourage subsequent modification by readers is not Transparent.
+An image format is not Transparent if used for any substantial amount
+of text.  A copy that is not &ldquo;Transparent&rdquo; is called &ldquo;Opaque&rdquo;.
+</p>
+<p>Examples of suitable formats for Transparent copies include plain
+<small>ASCII</small> without markup, Texinfo input format, LaTeX input
+format, <acronym>SGML</acronym> or <acronym>XML</acronym> using a publicly available
+<acronym>DTD</acronym>, and standard-conforming simple <acronym>HTML</acronym>,
+PostScript or <acronym>PDF</acronym> designed for human modification.  Examples
+of transparent image formats include <acronym>PNG</acronym>, <acronym>XCF</acronym> and
+<acronym>JPG</acronym>.  Opaque formats include proprietary formats that can be
+read and edited only by proprietary word processors, <acronym>SGML</acronym> or
+<acronym>XML</acronym> for which the <acronym>DTD</acronym> and/or processing tools are
+not generally available, and the machine-generated <acronym>HTML</acronym>,
+PostScript or <acronym>PDF</acronym> produced by some word processors for
+output purposes only.
+</p>
+<p>The &ldquo;Title Page&rdquo; means, for a printed book, the title page itself,
+plus such following pages as are needed to hold, legibly, the material
+this License requires to appear in the title page.  For works in
+formats which do not have any title page as such, &ldquo;Title Page&rdquo; means
+the text near the most prominent appearance of the work&rsquo;s title,
+preceding the beginning of the body of the text.
+</p>
+<p>The &ldquo;publisher&rdquo; means any person or entity that distributes copies
+of the Document to the public.
+</p>
+<p>A section &ldquo;Entitled XYZ&rdquo; means a named subunit of the Document whose
+title either is precisely XYZ or contains XYZ in parentheses following
+text that translates XYZ in another language.  (Here XYZ stands for a
+specific section name mentioned below, such as &ldquo;Acknowledgements&rdquo;,
+&ldquo;Dedications&rdquo;, &ldquo;Endorsements&rdquo;, or &ldquo;History&rdquo;.)  To &ldquo;Preserve the Title&rdquo;
+of such a section when you modify the Document means that it remains a
+section &ldquo;Entitled XYZ&rdquo; according to this definition.
+</p>
+<p>The Document may include Warranty Disclaimers next to the notice which
+states that this License applies to the Document.  These Warranty
+Disclaimers are considered to be included by reference in this
+License, but only as regards disclaiming warranties: any other
+implication that these Warranty Disclaimers may have is void and has
+no effect on the meaning of this License.
+</p>
+</li><li> VERBATIM COPYING
+
+<p>You may copy and distribute the Document in any medium, either
+commercially or noncommercially, provided that this License, the
+copyright notices, and the license notice saying this License applies
+to the Document are reproduced in all copies, and that you add no other
+conditions whatsoever to those of this License.  You may not use
+technical measures to obstruct or control the reading or further
+copying of the copies you make or distribute.  However, you may accept
+compensation in exchange for copies.  If you distribute a large enough
+number of copies you must also follow the conditions in section 3.
+</p>
+<p>You may also lend copies, under the same conditions stated above, and
+you may publicly display copies.
+</p>
+</li><li> COPYING IN QUANTITY
+
+<p>If you publish printed copies (or copies in media that commonly have
+printed covers) of the Document, numbering more than 100, and the
+Document&rsquo;s license notice requires Cover Texts, you must enclose the
+copies in covers that carry, clearly and legibly, all these Cover
+Texts: Front-Cover Texts on the front cover, and Back-Cover Texts on
+the back cover.  Both covers must also clearly and legibly identify
+you as the publisher of these copies.  The front cover must present
+the full title with all words of the title equally prominent and
+visible.  You may add other material on the covers in addition.
+Copying with changes limited to the covers, as long as they preserve
+the title of the Document and satisfy these conditions, can be treated
+as verbatim copying in other respects.
+</p>
+<p>If the required texts for either cover are too voluminous to fit
+legibly, you should put the first ones listed (as many as fit
+reasonably) on the actual cover, and continue the rest onto adjacent
+pages.
+</p>
+<p>If you publish or distribute Opaque copies of the Document numbering
+more than 100, you must either include a machine-readable Transparent
+copy along with each Opaque copy, or state in or with each Opaque copy
+a computer-network location from which the general network-using
+public has access to download using public-standard network protocols
+a complete Transparent copy of the Document, free of added material.
+If you use the latter option, you must take reasonably prudent steps,
+when you begin distribution of Opaque copies in quantity, to ensure
+that this Transparent copy will remain thus accessible at the stated
+location until at least one year after the last time you distribute an
+Opaque copy (directly or through your agents or retailers) of that
+edition to the public.
+</p>
+<p>It is requested, but not required, that you contact the authors of the
+Document well before redistributing any large number of copies, to give
+them a chance to provide you with an updated version of the Document.
+</p>
+</li><li> MODIFICATIONS
+
+<p>You may copy and distribute a Modified Version of the Document under
+the conditions of sections 2 and 3 above, provided that you release
+the Modified Version under precisely this License, with the Modified
+Version filling the role of the Document, thus licensing distribution
+and modification of the Modified Version to whoever possesses a copy
+of it.  In addition, you must do these things in the Modified Version:
+</p>
+<ol type="A" start="1">
+<li> Use in the Title Page (and on the covers, if any) a title distinct
+from that of the Document, and from those of previous versions
+(which should, if there were any, be listed in the History section
+of the Document).  You may use the same title as a previous version
+if the original publisher of that version gives permission.
+
+</li><li> List on the Title Page, as authors, one or more persons or entities
+responsible for authorship of the modifications in the Modified
+Version, together with at least five of the principal authors of the
+Document (all of its principal authors, if it has fewer than five),
+unless they release you from this requirement.
+
+</li><li> State on the Title page the name of the publisher of the
+Modified Version, as the publisher.
+
+</li><li> Preserve all the copyright notices of the Document.
+
+</li><li> Add an appropriate copyright notice for your modifications
+adjacent to the other copyright notices.
+
+</li><li> Include, immediately after the copyright notices, a license notice
+giving the public permission to use the Modified Version under the
+terms of this License, in the form shown in the Addendum below.
+
+</li><li> Preserve in that license notice the full lists of Invariant Sections
+and required Cover Texts given in the Document&rsquo;s license notice.
+
+</li><li> Include an unaltered copy of this License.
+
+</li><li> Preserve the section Entitled &ldquo;History&rdquo;, Preserve its Title, and add
+to it an item stating at least the title, year, new authors, and
+publisher of the Modified Version as given on the Title Page.  If
+there is no section Entitled &ldquo;History&rdquo; in the Document, create one
+stating the title, year, authors, and publisher of the Document as
+given on its Title Page, then add an item describing the Modified
+Version as stated in the previous sentence.
+
+</li><li> Preserve the network location, if any, given in the Document for
+public access to a Transparent copy of the Document, and likewise
+the network locations given in the Document for previous versions
+it was based on.  These may be placed in the &ldquo;History&rdquo; section.
+You may omit a network location for a work that was published at
+least four years before the Document itself, or if the original
+publisher of the version it refers to gives permission.
+
+</li><li> For any section Entitled &ldquo;Acknowledgements&rdquo; or &ldquo;Dedications&rdquo;, Preserve
+the Title of the section, and preserve in the section all the
+substance and tone of each of the contributor acknowledgements and/or
+dedications given therein.
+
+</li><li> Preserve all the Invariant Sections of the Document,
+unaltered in their text and in their titles.  Section numbers
+or the equivalent are not considered part of the section titles.
+
+</li><li> Delete any section Entitled &ldquo;Endorsements&rdquo;.  Such a section
+may not be included in the Modified Version.
+
+</li><li> Do not retitle any existing section to be Entitled &ldquo;Endorsements&rdquo; or
+to conflict in title with any Invariant Section.
+
+</li><li> Preserve any Warranty Disclaimers.
+</li></ol>
+
+<p>If the Modified Version includes new front-matter sections or
+appendices that qualify as Secondary Sections and contain no material
+copied from the Document, you may at your option designate some or all
+of these sections as invariant.  To do this, add their titles to the
+list of Invariant Sections in the Modified Version&rsquo;s license notice.
+These titles must be distinct from any other section titles.
+</p>
+<p>You may add a section Entitled &ldquo;Endorsements&rdquo;, provided it contains
+nothing but endorsements of your Modified Version by various
+parties&mdash;for example, statements of peer review or that the text has
+been approved by an organization as the authoritative definition of a
+standard.
+</p>
+<p>You may add a passage of up to five words as a Front-Cover Text, and a
+passage of up to 25 words as a Back-Cover Text, to the end of the list
+of Cover Texts in the Modified Version.  Only one passage of
+Front-Cover Text and one of Back-Cover Text may be added by (or
+through arrangements made by) any one entity.  If the Document already
+includes a cover text for the same cover, previously added by you or
+by arrangement made by the same entity you are acting on behalf of,
+you may not add another; but you may replace the old one, on explicit
+permission from the previous publisher that added the old one.
+</p>
+<p>The author(s) and publisher(s) of the Document do not by this License
+give permission to use their names for publicity for or to assert or
+imply endorsement of any Modified Version.
+</p>
+</li><li> COMBINING DOCUMENTS
+
+<p>You may combine the Document with other documents released under this
+License, under the terms defined in section 4 above for modified
+versions, provided that you include in the combination all of the
+Invariant Sections of all of the original documents, unmodified, and
+list them all as Invariant Sections of your combined work in its
+license notice, and that you preserve all their Warranty Disclaimers.
+</p>
+<p>The combined work need only contain one copy of this License, and
+multiple identical Invariant Sections may be replaced with a single
+copy.  If there are multiple Invariant Sections with the same name but
+different contents, make the title of each such section unique by
+adding at the end of it, in parentheses, the name of the original
+author or publisher of that section if known, or else a unique number.
+Make the same adjustment to the section titles in the list of
+Invariant Sections in the license notice of the combined work.
+</p>
+<p>In the combination, you must combine any sections Entitled &ldquo;History&rdquo;
+in the various original documents, forming one section Entitled
+&ldquo;History&rdquo;; likewise combine any sections Entitled &ldquo;Acknowledgements&rdquo;,
+and any sections Entitled &ldquo;Dedications&rdquo;.  You must delete all
+sections Entitled &ldquo;Endorsements.&rdquo;
+</p>
+</li><li> COLLECTIONS OF DOCUMENTS
+
+<p>You may make a collection consisting of the Document and other documents
+released under this License, and replace the individual copies of this
+License in the various documents with a single copy that is included in
+the collection, provided that you follow the rules of this License for
+verbatim copying of each of the documents in all other respects.
+</p>
+<p>You may extract a single document from such a collection, and distribute
+it individually under this License, provided you insert a copy of this
+License into the extracted document, and follow this License in all
+other respects regarding verbatim copying of that document.
+</p>
+</li><li> AGGREGATION WITH INDEPENDENT WORKS
+
+<p>A compilation of the Document or its derivatives with other separate
+and independent documents or works, in or on a volume of a storage or
+distribution medium, is called an &ldquo;aggregate&rdquo; if the copyright
+resulting from the compilation is not used to limit the legal rights
+of the compilation&rsquo;s users beyond what the individual works permit.
+When the Document is included in an aggregate, this License does not
+apply to the other works in the aggregate which are not themselves
+derivative works of the Document.
+</p>
+<p>If the Cover Text requirement of section 3 is applicable to these
+copies of the Document, then if the Document is less than one half of
+the entire aggregate, the Document&rsquo;s Cover Texts may be placed on
+covers that bracket the Document within the aggregate, or the
+electronic equivalent of covers if the Document is in electronic form.
+Otherwise they must appear on printed covers that bracket the whole
+aggregate.
+</p>
+</li><li> TRANSLATION
+
+<p>Translation is considered a kind of modification, so you may
+distribute translations of the Document under the terms of section 4.
+Replacing Invariant Sections with translations requires special
+permission from their copyright holders, but you may include
+translations of some or all Invariant Sections in addition to the
+original versions of these Invariant Sections.  You may include a
+translation of this License, and all the license notices in the
+Document, and any Warranty Disclaimers, provided that you also include
+the original English version of this License and the original versions
+of those notices and disclaimers.  In case of a disagreement between
+the translation and the original version of this License or a notice
+or disclaimer, the original version will prevail.
+</p>
+<p>If a section in the Document is Entitled &ldquo;Acknowledgements&rdquo;,
+&ldquo;Dedications&rdquo;, or &ldquo;History&rdquo;, the requirement (section 4) to Preserve
+its Title (section 1) will typically require changing the actual
+title.
+</p>
+</li><li> TERMINATION
+
+<p>You may not copy, modify, sublicense, or distribute the Document
+except as expressly provided under this License.  Any attempt
+otherwise to copy, modify, sublicense, or distribute it is void, and
+will automatically terminate your rights under this License.
+</p>
+<p>However, if you cease all violation of this License, then your license
+from a particular copyright holder is reinstated (a) provisionally,
+unless and until the copyright holder explicitly and finally
+terminates your license, and (b) permanently, if the copyright holder
+fails to notify you of the violation by some reasonable means prior to
+60 days after the cessation.
+</p>
+<p>Moreover, your license from a particular copyright holder is
+reinstated permanently if the copyright holder notifies you of the
+violation by some reasonable means, this is the first time you have
+received notice of violation of this License (for any work) from that
+copyright holder, and you cure the violation prior to 30 days after
+your receipt of the notice.
+</p>
+<p>Termination of your rights under this section does not terminate the
+licenses of parties who have received copies or rights from you under
+this License.  If your rights have been terminated and not permanently
+reinstated, receipt of a copy of some or all of the same material does
+not give you any rights to use it.
+</p>
+</li><li> FUTURE REVISIONS OF THIS LICENSE
+
+<p>The Free Software Foundation may publish new, revised versions
+of the GNU Free Documentation License from time to time.  Such new
+versions will be similar in spirit to the present version, but may
+differ in detail to address new problems or concerns.  See
+<a href="http://www.gnu.org/copyleft/">http://www.gnu.org/copyleft/</a>.
+</p>
+<p>Each version of the License is given a distinguishing version number.
+If the Document specifies that a particular numbered version of this
+License &ldquo;or any later version&rdquo; applies to it, you have the option of
+following the terms and conditions either of that specified version or
+of any later version that has been published (not as a draft) by the
+Free Software Foundation.  If the Document does not specify a version
+number of this License, you may choose any version ever published (not
+as a draft) by the Free Software Foundation.  If the Document
+specifies that a proxy can decide which future versions of this
+License can be used, that proxy&rsquo;s public statement of acceptance of a
+version permanently authorizes you to choose that version for the
+Document.
+</p>
+</li><li> RELICENSING
+
+<p>&ldquo;Massive Multiauthor Collaboration Site&rdquo; (or &ldquo;MMC Site&rdquo;) means any
+World Wide Web server that publishes copyrightable works and also
+provides prominent facilities for anybody to edit those works.  A
+public wiki that anybody can edit is an example of such a server.  A
+&ldquo;Massive Multiauthor Collaboration&rdquo; (or &ldquo;MMC&rdquo;) contained in the
+site means any set of copyrightable works thus published on the MMC
+site.
+</p>
+<p>&ldquo;CC-BY-SA&rdquo; means the Creative Commons Attribution-Share Alike 3.0
+license published by Creative Commons Corporation, a not-for-profit
+corporation with a principal place of business in San Francisco,
+California, as well as future copyleft versions of that license
+published by that same organization.
+</p>
+<p>&ldquo;Incorporate&rdquo; means to publish or republish a Document, in whole or
+in part, as part of another Document.
+</p>
+<p>An MMC is &ldquo;eligible for relicensing&rdquo; if it is licensed under this
+License, and if all works that were first published under this License
+somewhere other than this MMC, and subsequently incorporated in whole
+or in part into the MMC, (1) had no cover texts or invariant sections,
+and (2) were thus incorporated prior to November 1, 2008.
+</p>
+<p>The operator of an MMC Site may republish an MMC contained in the site
+under CC-BY-SA on the same site at any time before August 1, 2009,
+provided the MMC is eligible for relicensing.
+</p>
+</li></ol>
+
+<span id="ADDENDUM_003a-How-to-use-this-License-for-your-documents"></span><h3 class="heading">ADDENDUM: How to use this License for your documents</h3>
+
+<p>To use this License in a document you have written, include a copy of
+the License in the document and put the following copyright and
+license notices just after the title page:
+</p>
+<div class="example">
+<pre class="example">  Copyright (C)  <var>year</var>  <var>your name</var>.
+  Permission is granted to copy, distribute and/or modify this document
+  under the terms of the GNU Free Documentation License, Version 1.3
+  or any later version published by the Free Software Foundation;
+  with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+  Texts.  A copy of the license is included in the section entitled ``GNU
+  Free Documentation License''.
+</pre></div>
+
+<p>If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts,
+replace the &ldquo;with&hellip;Texts.&rdquo; line with this:
+</p>
+<div class="example">
+<pre class="example">    with the Invariant Sections being <var>list their titles</var>, with
+    the Front-Cover Texts being <var>list</var>, and with the Back-Cover Texts
+    being <var>list</var>.
+</pre></div>
+
+<p>If you have Invariant Sections without Cover Texts, or some other
+combination of the three, merge those two alternatives to suit the
+situation.
+</p>
+<p>If your document contains nontrivial examples of program code, we
+recommend releasing these examples in parallel under your choice of
+free software license, such as the GNU General Public License,
+to permit their use in free software.
+</p>
+
+
+</div>
+</div>
+
+
+
+</body>
+</html>
