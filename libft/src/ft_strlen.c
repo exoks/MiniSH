@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 21:16:13 by oezzaou           #+#    #+#             */
-/*   Updated: 2022/10/02 18:00:17 by oezzaou          ###   ########.fr       */
+/*   Updated: 2025/02/23 20:02:53 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -14,6 +14,8 @@
 //====<[ ft_strlen: ]>==========================================================
 size_t	ft_strlen(const char *s)
 {
+	if (!s)
+		return (-1);
 	if (*s)
 		return (1 + ft_strlen(++s));
 	return (0);
