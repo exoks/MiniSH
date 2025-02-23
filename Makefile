@@ -5,7 +5,7 @@
 #  ⢀⠔⠉⠀⠊⠿⠿⣿⠂⠠⠢⣤⠤⣤⣼⣿⣶⣶⣤⣝⣻⣷⣦⣍⡻⣿⣿⣿⣿⡀                                              
 #  ⢾⣾⣆⣤⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠉⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇                                              
 #  ⠀⠈⢋⢹⠋⠉⠙⢦⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇       Created: 2025/02/22 11:42:15 by oezzaou
-#  ⠀⠀⠀⠑⠀⠀⠀⠈⡇⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇       Updated: 2025/02/22 17:27:09 by oezzaou
+#  ⠀⠀⠀⠑⠀⠀⠀⠈⡇⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇       Updated: 2025/02/23 17:06:31 by oezzaou
 #  ⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⢀⣾⣿⣿⠿⠟⠛⠋⠛⢿⣿⣿⠻⣿⣿⣿⣿⡿⠀                                              
 #  ⠀⠀⠀⠀⠀⠀⠀⢀⠇⠀⢠⣿⣟⣭⣤⣶⣦⣄⡀⠀⠀⠈⠻⠀⠘⣿⣿⣿⠇⠀                                              
 #  ⠀⠀⠀⠀⠀⠱⠤⠊⠀⢀⣿⡿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠘⣿⠏⠀⠀                             𓆩♕𓆪      
@@ -18,7 +18,7 @@ CFLAGS				:= -Wall -Wextra -Werror #-g -fsanitize=address
 RM						:= rm -rf
 
 #====<[ Colors: ]>==============================================================
-GREEN					= \033[0;32m
+GREEN					= \033[1;32m
 RED						= \033[1;31m
 BLUE					= \033[34m
 CYAN					= \033[1;36m
@@ -44,117 +44,78 @@ RESET					= \033[1;0m
 #===<[ Sources: ]>==============================================================
 PROJECT				:= Minishell
 NAME					:= minishell
-NAME_BNS			:= minishell_bonus
-# Directories:
-SRC_DIR				:= srcs
-LIBFT_DIR			:= libft
+SRC_DIR				:= src
 RDL_DIR				:= readline
-OBJ_DIR				:= objs
-OBJ_BNS_DIR		:= bonus_objs
-# Libraries:
-LIBFT					:= $(LIBFT_DIR)/libft.a
-# Files:
-SRC						:= $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/*/src/*.c)\
-								 $(wildcard $(SRC_DIR)/*/src/*/*.c)
+OBJ_DIR				:= obj
+LIBFT					:= libft 
+SRC						:= $(wildcard $(SRC_DIR)/*.c)\
+								 $(wildcard $(SRC_DIR)/*/$(SRC_DIR)/*.c)\
+								 $(wildcard $(SRC_DIR)/*/$(SRC_DIR)/*/*.c)
 
-OBJ						:= $(patsubst %.c,$(OBJ_DIR)/%.o, $(notdir $(SRC)))
-OBJ_BNS				:= $(patsubst %.c,$(OBJ_BNS_DIR)/%.o, $(notdir $(SRC)))
-# include:
-INCLUDE				:= ../readline/include/readline.h $(wildcard include/*.h)\
-								 $(wildcard */include/*.h) $(wildcard */*/include/*.h)
+OBJ						:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(SRC)))
+
+INCLUDE				:= ../readline/include/readline.h\
+								 $(wildcard include/*.h)\
+								 $(wildcard */include/*.h)\
+								 $(wildcard */*/include/*.h)
+
 INCLUDE_DIRS	:= $(sort $(dir $(INCLUDE)))
-# Command:
-LINKS					:= -lft -lreadline 
-LINKS_DIR			:= -L $(LIBFT_DIR) -L $(RDL_DIR)
 INCLUDE				:= $(addprefix -I,$(INCLUDE_DIRS))
+EXTERNAL_LIBS	:= -L $(LIBFT) -lft -L $(RDL_DIR) -lreadline 
 
 #====<[ Rules: ]>===============================================================
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | .create_dirs
-	@$(CC) $(CFLAGS) -D NAME_BNS=0 $(INCLUDE) -c $< -o $@
-	@printf "$(GREEN)[OK]${RESET} ${PINK}Compiling${RESET} %-42s| $@\n" "$<"
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/*/src/%.c | .create_dirs
-	@$(CC) $(CFLAGS) -D NAME_BNS=0 $(INCLUDE) -c $< -o $@
-	@printf "$(GREEN)[OK]${RESET} ${PINK}Compiling${RESET} %-42s| $@\n" "$<"
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/*/src/*/%.c | .create_dirs
-	@$(CC) $(CFLAGS) -D NAME_BNS=0 $(INCLUDE) -c $< -o $@
-	@printf "$(GREEN)[OK]${RESET} ${PINK}Compiling${RESET} %-42s| $@\n" "$<"
-
-# bonus pattern rules:
-$(OBJ_BNS_DIR)/%.o: $(SRC_DIR)/%.c | .create_bdirs
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | .create_dir
 	@$(CC) $(CFLAGS) -D NAME_BNS=1 $(INCLUDE) -c $< -o $@
 	@printf "$(GREEN)[OK]${RESET} ${PINK}Compiling${RESET} %-42s| $@\n" "$<"
 
-$(OBJ_BNS_DIR)/%.o: $(SRC_DIR)/*/src/%.c | .create_bdirs
+$(OBJ_DIR)/%.o: $(SRC_DIR)/*/$(SRC_DIR)/%.c | .create_dir
+	@$(CC) $(CFLAGS) -D NAME_BNS=1 $(INCLUDE) -c $< -o $@
+	@printf "$(GREEN)[OK]${RESET} ${PINK}Compiling${RESET} %-42s| $@\n" "$<"
+#
+$(OBJ_DIR)/%.o: $(SRC_DIR)/*/$(SRC_DIR)/*/%.c | .create_dir
 	@$(CC) $(CFLAGS) -D NAME_BNS=1 $(INCLUDE) -c $< -o $@
 	@printf "$(GREEN)[OK]${RESET} ${PINK}Compiling${RESET} %-42s| $@\n" "$<"
 
-$(OBJ_BNS_DIR)/%.o: $(SRC_DIR)/*/src/*/%.c | .create_bdirs
-	@$(CC) $(CFLAGS) -D NAME_BNS=1 $(INCLUDE) -c $< -o $@
-	@printf "$(GREEN)[OK]${RESET} ${PINK}Compiling${RESET} %-42s| $@\n" "$<"
-
-# role :
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(CFLAGS) $(INCLUDE) $(LINKS_DIR) $^ -o $@ $(LINKS)
+$(NAME): $(LIBFT) | $(OBJ)
+	@$(CC) $(CFLAGS) $(INCLUDE) $| -o $@ $(EXTERNAL_LIBS)
 	@echo "${GREEN}[OK] ${CYAN}$(NAME) ✔️${RESET}"
 
-$(LIBFT):
-	@make -SC $(LIBFT_DIR)
-
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
-
-$(OBJ_BNS_DIR):
-	@mkdir -p $(OBJ_BNS_DIR);
-
-bonus: $(NAME_BNS)
+run:
+	./$(NAME)
 
 signature:
 	@printf "${GRAY}%19s${RESET}\n" "𓆩♕𓆪"
 	@printf "${GRAY}%s${RESET}\n"		"𓄂 oussama ezzaou𓆃  "
 
-run:
-	./$(NAME)
+$(LIBFT):
+	@make -C $@ 
 
-$(NAME_BNS): $(LIBFT) $(OBJ_BNS)
-	@$(CC) $(CFLAGS) $(INCLUDE) $(LINKS_DIR) $^ -o $@ $(LINKS)
-	@echo "$(GREEN) [OK]$(RESET)$(YELLOW)	[ $@ is created ]$(RESET)"
-	@echo "${GREEN}[OK] ${CYAN}$(NAME_BNS) ✔️${RESET}"
+$(OBJ_DIR):
+	@mkdir -p $@
 
 clean:
-	@make -C $(LIBFT_DIR) clean
+	@make -C $(LIBFT) fclean
 	@if [ -d $(OBJ_DIR) ]; then\
 		${RM} $(OBJ_DIR);\
 		printf "${GREEN}[OK]${RESET} ${ORANGE}Cleaning  %-42s${RESET}| ./%s\n"\
 					 "... " "$(PROJECT)/$(OBJ_DIR) ✔️";\
-	fi
-	@if [ -d $(OBJ_BNS_DIR) ]; then\
-		${RM} $(OBJ_BNS_DIR);\
-		printf "${GREEN}[OK]${RESET} ${ORANGE}Cleaning  %-42s${RESET}| ./%s\n"\
-					 "... " "$(PROJECT)/$(OBJ_BNS_DIR) ✔️";\
+	else\
+		printf "${RED}[KO]${RESET} ${BLUE}Not Found %-42s${RESET}| ./%s\n"\
+					 "..." "$(PROJECT)/$(OBJ_DIR) ✖️";\
 	fi
 
 fclean: clean
-	@make -C $(LIBFT_DIR) fclean
 	@if [ -f $(NAME) ]; then\
 		${RM} $(NAME);\
 		printf "${GREEN}[OK]${RESET} ${ORANGE}Cleaning  %-42s${RESET}| ./%s\n"\
 					 "... " "$(PROJECT)/$(NAME) ✔️";\
 	fi
-	@if [ -f $(NAME_BNS) ]; then\
-		${RM} $(NAME_BNS);\
-		printf "${GREEN}[OK]${RESET} ${ORANGE}Cleaning  %-42s${RESET}| ./%s\n"\
-					 "... " "$(PROJECT)/$(NAME_BNS) ✔️";\
-	fi
-
-.create_dirs: $(OBJ_DIR)
-
-.create_bdirs: $(OBJ_BNS_DIR)
 
 re: fclean all
 
-.PHONY: all clean fclean re run
+.create_dir: $(OBJ_DIR)
+
+.PHONY: all clean fclean re $(LIBFT) run signature 
 #===============================================================================

@@ -6,10 +6,9 @@
 /*   By: hael-mou <hael-mou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 07:17:12 by hael-mou          #+#    #+#             */
-/*   Updated: 2023/07/27 18:08:39 by hael-mou         ###   ########.fr       */
+/*   Updated: 2025/02/23 15:37:58 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #ifndef DEFINES_H
 # define DEFINES_H
 
@@ -29,7 +28,7 @@
 /*###############################################################
 #		* Define NULL  :										#
 ###############################################################*/
-# ifndef NULL
+#ifndef NULL
 #  include <sys/_types.h>
 #  define NULL  __DARWIN_NULL
 # endif  /* NULL */
