@@ -6,7 +6,7 @@
 /*   By: hael-mou <hael-mou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:45:47 by hael-mou          #+#    #+#             */
-/*   Updated: 2023/07/27 19:03:13 by hael-mou         ###   ########.fr       */
+/*   Updated: 2025/02/24 09:44:41 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_list	*extract_files(t_list *tokens)
 	return (files);
 }
 
-//=== clean tree ========================================================
+//===<[ clean tree: ]>========================================================
 void	clean_tree(t_node *head)
 {
 	int	node_type;
@@ -110,8 +110,6 @@ void	clean_tree(t_node *head)
 			clean_operator((t_operator *)head);
 		}
 		else if (node_type == COMMAND)
-		{
 			clean_command((t_command *)head);
-		}
 	}
 }
