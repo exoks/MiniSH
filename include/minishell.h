@@ -6,7 +6,7 @@
 /*   By: hael-mou <hael-mou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 14:35:28 by hael-mou          #+#    #+#             */
-/*   Updated: 2025/02/24 08:23:33 by oezzaou          ###   ########.fr       */
+/*   Updated: 2025/02/24 11:31:26 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define ICON_SUCCESS	"\033[0;32m◉"
 # define ICON_FAILURE	"\033[0;91m◉"
 # define ICON_PROMPT	"\033[0;120m ︻╦̵̵̿╤── \033[38;5;214m❯❯\033[1;0m "
-# define PROMPT_GIT		"\033[1;34m git:(\033[1;31mmain\033[1;34m)"
+# define PROMPT_GIT		"\033[1;34mgit:(\033[1;31mmain\033[1;34m)"
 # define PROMPT_SUFFIX	"\033[1;33m ✗"
 # define WAITE			"\033[0;120m"
 # define CYAN			"\033[1;96m"
