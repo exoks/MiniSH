@@ -6,7 +6,7 @@
 /*   By: hael-mou <hael-mou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 16:49:20 by hael-mou          #+#    #+#             */
-/*   Updated: 2023/07/27 20:37:30 by hael-mou         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:28:50 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ void	sigint_hendler(int signum)
 		exit(1);
 }
 
-//===	minishell_signal ======================================================
+//===	minishell_signal =========================================================
 void	minishell_signal(void)
 {
 	signal(SIGINT, &sigint_hendler);
 	signal(SIGQUIT, SIG_IGN);
 }
 
+//=== minish_sigign ============================================================
 void	minish_sigign(void)
 {
 	signal(SIGINT, SIG_IGN);

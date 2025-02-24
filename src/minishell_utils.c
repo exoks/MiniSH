@@ -6,13 +6,13 @@
 /*   By: hael-mou <hael-mou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:05:02 by hael-mou          #+#    #+#             */
-/*   Updated: 2023/07/27 11:42:47 by hael-mou         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:27:51 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//=== minishell init ==========================================================
+//===<[ minishell_init: ]>======================================================
 void	minishell_init(char **env)
 {
 	g_sys.std_in = dup(STDIN_FILENO);
@@ -61,7 +61,7 @@ void	minishell_ignore(int argc, char **argv)
 	(void) argv;
 }
 
-//=== minishell_clean =========================================================
+//===<[ minishell_clean: ]>=====================================================
 void	minishell_clean(t_minish *minish)
 {
 	clean_tree(minish->tree);
