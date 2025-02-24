@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 11:46:06 by hael-mou          #+#    #+#             */
-/*   Updated: 2023/07/28 16:57:10 by oezzaou          ###   ########.fr       */
+/*   Updated: 2025/02/24 11:13:03 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ typedef struct s_command
 /*###############################################################
 #		* Functions :		    							 	#
 ###############################################################*/
-// command function :
+
+//====<[ command function : ]>====================
 t_node	*create_command_node(void);
 void	clean_command(t_command *cmd);
 
