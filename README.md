@@ -2,6 +2,8 @@
 **MiniSH** is a simple shell like bash built in `C`.
 <img width="1421" alt="Image" src="https://github.com/user-attachments/assets/b2e2aba1-111f-486a-b221-26fae3bc4fd8" />
 
+---
+
 ## **Features** ##
 * **Interactive** shell prompt
 * **Continuation prompt** to handle incomplete commands 
@@ -50,15 +52,39 @@
 ### 1. Reads user input from the terminal ###
 
 ### 2. **Lexer** ###
-Responsible for breaking down the user's input command line into meaningful **tokens**, based on the **Finite State Machine (FSM)** concept.
+Responsible for breaking down the user's input command line into meaningful **tokens**, based on the [**Finite State Machine (FSM)**](https://en.wikipedia.org/wiki/Finite-state_machine) concept.
   * **Tokenizer (Lexical Analysis):** Scans the input string and converts it into **tokens**, categorizing elements such as commands, operators, and literals...
   * **Analyzer (Syntactic & Semantic Checks):** Validates the token sequence, detecting **syntax errors**, ensuring **logical token order** (Grammar), Identifying **incomplete token sequences.** to display **Continuation promptes**.
 
 ### 3. **Parser** ###
-Processes the token sequence and constructs an **Abstract Syntax Tree (AST)** using the **Recursive Descent Parsing** algorithm.
+Processes the **token sequence** and constructs an **Abstract Syntax Tree (AST)** using the **[Recursive Descent Parsing](https://www.geeksforgeeks.org/recursive-descent-parser/)** algorithm.
+##### Example Command: #####
+```bash
+(cd && echo "=> /HOME" || echo "Failed") | grep "Changed" ; echo "End"
+```
+##### Corresponding AST: Binary Tree ####
+```bash
+                                            Root Node
+                                              [`;`]
+                                               / \
+                                              /   \
+                                          [`|`]   [echo "End"] 
+                                          /   \
+                                     [`()`]   [grep "Changed"]
+                                       | 
+                                     [`&&`]
+                                     /    \
+                                  [cd]   [`||`]
+                                         /    \
+                                        /      \
+                         [echo "=> /HOME"]    [echo "Failed"]
+```
+This shows how the command is split into parts, with each operator (`;`, `|`, `&&`, `||`, `()`) forming a node in the tree. The recursive descent parser processes each part in order of operator priority, ensuring the command is parsed and executed correctly.
+
+#### MiniSH operators priority: ####
 
 ### 4. **Expander** ###
-Responsible for handling **variable substitution** (`$USER`), **wildcard expansion** (`*`), and **tilde** (`~`).
+Responsible for handling **variable substitution** (`$USER`), **wildcard expansion** (`*`), and **tilde** (`~`) ...
   * **ENV Expansion (`$VAR`)**
     - Replaces variables with their values from the environment. 
     - Example : 
