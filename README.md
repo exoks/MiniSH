@@ -33,7 +33,7 @@
           - [Simple Commands]()
           - [Compound Commands]()
       - [External Commands](#external-commands)
-      - [Subshells](#subsheels-)
+      - [Subshells](#subshells)
       - [Signals Management](#signals-management)
 5. [Usage Guide](#usage-guide)  
 
