@@ -54,7 +54,15 @@
 ### 2. **Lexer** ###
 Responsible for breaking down the user's input command line into meaningful **tokens**, based on the [**Finite State Machine (FSM)**](https://en.wikipedia.org/wiki/Finite-state_machine) concept.
   * **Tokenizer (Lexical Analysis):** Scans the input string and converts it into **tokens**, categorizing elements such as commands, operators, and literals...
-  * **Analyzer (Syntactic & Semantic Checks):** Validates the token sequence, detecting **syntax errors**, ensuring **logical token order** (Grammar), Identifying **incomplete token sequences.** to display **Continuation promptes**.
+  * **Analyzer (Syntactic & Semantic Checks):** Validates the **token sequence**, detecting **syntax errors**, ensuring **logical token order** (Grammar), Identifying **incomplete token sequences** to display **Continuation promptes**.
+
+> **Continuation promptes**  
+<img width="500" alt="Image" src="https://github.com/user-attachments/assets/529e2f03-e9e3-4bed-9150-d84ada87a4dd" />
+<img width="500" alt="Image" src="https://github.com/user-attachments/assets/8d926069-73b7-4884-b651-4ac5ea1a2bd1" />
+<img width="500" alt="Image" src="https://github.com/user-attachments/assets/c6f4bf1e-3e25-4988-96de-8b0371efbb9f" />
+<img width="500" alt="Image" src="https://github.com/user-attachments/assets/53aa41c5-a852-45e9-af47-3e7306922b21" />
+<img width="500" alt="Image" src="https://github.com/user-attachments/assets/35f99dd2-1a6c-435a-b398-6c7f97059b83" />
+<img width="500" alt="Image" src="https://github.com/user-attachments/assets/def1e7d8-d7ab-4075-aba2-b88dba0c298d" />
 
 ### 3. **Parser** ###
 Processes the **token sequence** and constructs an **Abstract Syntax Tree (AST)** using the **[Recursive Descent Parsing](https://www.geeksforgeeks.org/recursive-descent-parser/)** algorithm.
