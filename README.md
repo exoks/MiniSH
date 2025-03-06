@@ -3,32 +3,39 @@
 **MiniSH** is a simple shell like **bash**.
 <img width="1164" alt="Image" src="https://github.com/user-attachments/assets/ac24122e-bed0-4d6b-9094-b734a7bcd6ed" />
 
-## Table of Contents  
-- [Introduction](#MiniSH)  
-- [Features](##Features)  
-- [MiniSH Struct](##MiniSH_Structure)
-- [How It Works](##installation)  
-  * [User Input](#) 
-  * [Lexer](#) 
-      * [Tokenizer]()
-      * [Analyzer]()
-  * [Parser](#) 
-  * [Expander](#)
-      * [ENV Expansion (`$VAR`)]()
-      * [Tilde Expansion (`~`)]() 
-      * [Wildcard Expansion (`*`)]() 
-      * [Exit Status Expansion (`$?`)]() 
-      * [Heredoc `<<`]()
-  * [Interpreter](#)
-      * [Sequential command separator (`;`)]()
-      * [Logical Operators (`&&` and `||`)]()
-      * [Pipeline Management (`cmd1 | cmd2 | ... | cmdn`)]()
-      * [Manages Redirections (`<`, `>`, `>>` and `heredoc`-`<<`)]()
-      * [Built-in Commands]()
-      * [External Commands]()
-      * [Subshells `(...)`]()
-      * [Signals Management]()
-- [Usage Guide](##usage)  
+## **Table of Contents** ## 
+1. [Introduction](#MiniSH)  
+2. [Features](##Features)  
+3. [MiniSH Struct](#minish-structure)
+4. [How It Works](#how-it-works)  
+  - [User Input](#1-reads-user-input-from-the-terminal) 
+  - [2. Lexer](#2-lexer) 
+      - [Tokenizer]()
+      - [Analyzer]()
+      - [Continuation prompts]()
+  - [3. Parser](#3-parser) 
+    - [Example Command]()
+    - [Corresponding AST: Binary Tree]()
+  - [4. Expander](#4-expander)
+      - [ENV Expansion]()
+      - [Tilde Expansion (`~`)]() 
+      - [Wildcard Expansion]() 
+      - [Exit Status Expansion]() 
+      - [Heredoc]()
+  - [5. Interpreter](#5-interpreter-executor)
+      - [Sequential command separator](#sequential-command-separator-)
+      - [Logical Operators](#logical-operators--and-)
+          - [`&&` operator]()
+          - [`||` operator]()
+      - [Pipeline Management](#pipeline-management-)
+      - [Redirections Management](#manages-redirections--)
+      - [Built-in Commands](#built-in-commands)
+          - [Simple Commands]()
+          - [Compound Commands]()
+      - [External Commands](#external-commands)
+      - [Subshells](#subsheels-)
+      - [Signals Management](#signals-management)
+5. [Usage Guide](#usage-guide)  
 
 ---
 
@@ -118,6 +125,10 @@ Processes the **token sequence** and constructs an **Abstract Syntax Tree (AST)*
 This shows how the command is split into parts, with each operator (`;`, `|`, `&&`, `||`, `()`) forming a node in the tree. The recursive descent parser processes each part in order of operator priority, ensuring the command is parsed and executed correctly.
 
 #### MiniSH operators priority: ####
+1. `;`
+2. `&&` and `||`
+3. Pipes `|` 
+4. `cmds` and `subshell`
 
 ### 4. **Expander** ###
 Responsible for handling **variable substitution** (`$USER`), **wildcard expansion** (`*`), and **tilde** (`~`) ...
