@@ -3,6 +3,35 @@
 **MiniSH** is a simple shell like **bash**.
 <img width="1164" alt="Image" src="https://github.com/user-attachments/assets/ac24122e-bed0-4d6b-9094-b734a7bcd6ed" />
 
+## Table of Contents  
+- [Introduction](#MiniSH)  
+- [Features](##Features)  
+- [MiniSH Struct](##MiniSH_Structure)
+- [How It Works](##installation)  
+  * [User Input](#) 
+  * [Lexer](#) 
+      * [Tokenizer]()
+      * [Analyzer]()
+  * [Parser](#) 
+  * [Expander](#)
+      * [ENV Expansion (`$VAR`)]()
+      * [Tilde Expansion (`~`)]() 
+      * [Wildcard Expansion (`*`)]() 
+      * [Exit Status Expansion (`$?`)]() 
+      * [Heredoc `<<`]()
+  * [Interpreter](#)
+      * [Sequential command separator (`;`)]()
+      * [Logical Operators (`&&` and `||`)]()
+      * [Pipeline Management (`cmd1 | cmd2 | ... | cmdn`)]()
+      * [Manages Redirections (`<`, `>`, `>>` and `heredoc`-`<<`)]()
+      * [Built-in Commands]()
+      * [External Commands]()
+      * [Subshells `(...)`]()
+      * [Signals Management]()
+- [Usage Guide](##usage)  
+
+---
+
 ## **Features** ##
 * **Interactive** shell prompt
 * **Continuation prompt** to handle incomplete commands 
@@ -241,7 +270,9 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
   * **Signals Management** 
     - `Ctrl+C`: Sends a `SIGINT` signal, which interrupts the currently running command.
     - `Ctrl+D`: Sends an `EOF` (End of File) signal to the `minish`, causing it to exit or terminate the current command if no command is running.
-    
+
+---
+
 ## **Usage Guide** ##
 
 1. Clone **MiniSH** repository: 
@@ -257,3 +288,4 @@ make
 ```bash
 make run
 ```
+---
