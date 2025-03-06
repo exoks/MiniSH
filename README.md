@@ -1,7 +1,7 @@
 
 # **MiniSH** #
 **MiniSH** is a simple shell like **bash**.
-<img width="1421" alt="Image" src="https://github.com/user-attachments/assets/b2e2aba1-111f-486a-b221-26fae3bc4fd8" />
+<img width="1164" alt="Image" src="https://github.com/user-attachments/assets/ac24122e-bed0-4d6b-9094-b734a7bcd6ed" />
 
 ## **Features** ##
 * **Interactive** shell prompt
@@ -37,7 +37,7 @@
 * Error Handling
 * Exit Status Codes
 * `.git` directory detection
-* Displays the current working directory in the minsh prompt, just like Bash.
+* Displays the current working directory in the `minish` prompt, just like Bash.
 * History tracking
 
 --- 
@@ -242,3 +242,18 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     - `Ctrl+C`: Sends a `SIGINT` signal, which interrupts the currently running command.
     - `Ctrl+D`: Sends an `EOF` (End of File) signal to the `minish`, causing it to exit or terminate the current command if no command is running.
     
+## **Usage Guide** ##
+
+1. Clone **MiniSH** repository: 
+```bash
+git clone https://github.com/exoks/MiniSH.git
+cd MiniSH
+```
+2. Build `minishell` executable:
+```bash
+make
+```
+3. Run `minishell` executable
+```bash
+make run
+```
