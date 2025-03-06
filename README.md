@@ -10,7 +10,7 @@
 4. [How It Works](#how-it-works)  
   - [1. User Input](#1-reads-user-input-from-the-terminal) 
   - [2. Lexer](#2-lexer) 
-      - [Tokenizer](#tokenizer-lexical-analysis))
+      - [Tokenizer](#tokenizer-lexical-analysis)
       - [Analyzer](#analyzer-syntactic--semantic-checks)
       - [Continuation prompts]()
   - [3. Parser](#3-parser) 
