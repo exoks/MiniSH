@@ -5,10 +5,10 @@
 
 ## **Table of Contents** ## 
 1. [Introduction](#MiniSH)  
-2. [Features](##Features)  
+2. [Features](#features)  
 3. [MiniSH Struct](#minish-structure)
 4. [How It Works](#how-it-works)  
-  - [User Input](#1-reads-user-input-from-the-terminal) 
+  - [1. User Input](#1-reads-user-input-from-the-terminal) 
   - [2. Lexer](#2-lexer) 
       - [Tokenizer]()
       - [Analyzer]()
