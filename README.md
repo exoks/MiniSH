@@ -23,7 +23,7 @@
         - [Exit Status Expansion](#exit-status-expansion-) 
         - [Heredoc](#heredoc-)
     - [5. Interpreter](#5-interpreter-executor)
-        - [Sequential command separator `;`](#sequential-command-separator-)
+        - [1. Sequential command separator `;`](#1-sequential-command-separator-)
         - [Logical Operators](#logical-operators--and-)
             - [`&&` operator](#--and-operator--)
             - [`||` operator](#--or-operator--)
@@ -202,7 +202,7 @@ Responsible for handling **variable substitution** (`$USER`), **wildcard expansi
 ### 5. **Interpreter (Executor)**
 The interpreter is responsible for executing the Abstract Syntax Tree (AST) recursively.
 
-##### **Sequential command separator (`;`)** #####
+##### **1. Sequential command separator (`;`)** #####
   - Commands separated by `;` are executed **sequentially**, regardless of **success** or **failure**.
   - Example:
     ```bash
@@ -213,9 +213,9 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > `minish` executes `pwd`.  
     > Each command runs *independently*.
 
-##### **Logical Operators (`&&` and `||`)** #####
 
-###### **`&&` ( and operator ) :** ######
+##### **Logical Operators (`&&` and `||`)** #####
+###### ** `&&` ( and operator ) :** ######
   - `&&` executes the second command only if the first one succeeds (exit status 0).
   - Example:
     ```bash
