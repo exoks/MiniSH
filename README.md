@@ -28,7 +28,7 @@
           - [`&&` operator](#--and-operator--)
           - [`||` operator](#--or-operator--)
       - [Pipeline Management](#pipeline-management-cmd1--cmd2----cmdn)
-      - [Manages Redirections](#manages-redirections-heredoc)
+      - [Manages Redirections](#manages-redirections----and-heredoc-)
       - [Built-in Commands](#built-in-commands)
           - [Simple Commands]()
           - [Compound Commands]()
