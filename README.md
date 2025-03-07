@@ -30,8 +30,8 @@
       - [Pipeline Management](#pipeline-management-cmd1--cmd2----cmdn)
       - [Manages Redirections](#manages-redirections----and-heredoc-)
       - [Built-in Commands](#built-in-commands)
-          - [Simple Commands](#-simple-commands-)
-          - [Compound Commands](#-compound-commands-)
+          - [Simple Commands](#simple-commands-)
+          - [Compound Commands](#compound-commands-)
       - [External Commands](#external-commands)
       - [Subshells `(...)`](#subshells-)
       - [Signals Management](#signals-management)
@@ -259,7 +259,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
 
 ##### **Built-in Commands** ##### 
 
-###### **>>> Simple Commands :** ######
+###### **Simple Commands :** ######
   - When a command like `echo` or `cd` is used, the `minish` performs the operation directly **without forking** a new process.
   - Example : 
     ```bash
@@ -268,7 +268,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > The `minish` changes the current directory itself (without calling `/bin/cd`).  
     > No child process is created
 
-###### **>>> Compound Commands :** ######
+###### **Compound Commands :** ######
   - When these built-in commands are combined with other shell constructs like pipes or subshells, the `minish` may need to **fork** a **new process** to execute them in the appropriate context. 
   - Example : 
     ```bash
