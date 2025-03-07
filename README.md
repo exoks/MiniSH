@@ -17,11 +17,11 @@
     - [Example Command](#example-command-)
     - [Corresponding AST](#corresponding-ast--binary-tree)
   - [4. Expander](#4-expander)
-      - [ENV Expansion]()
-      - [Tilde Expansion (`~`)]() 
-      - [Wildcard Expansion]() 
-      - [Exit Status Expansion]() 
-      - [Heredoc]()
+      - [ENV Expansion](#env-expansion-var))
+      - [Tilde Expansion (`~`)](#tilde-expansion-) 
+      - [Wildcard Expansion](#wildcard-expansion-) 
+      - [Exit Status Expansion](#exit-status-expansion-) 
+      - [Heredoc](#heredoc-)
   - [5. Interpreter](#5-interpreter-executor)
       - [Sequential command separator](#sequential-command-separator-)
       - [Logical Operators](#logical-operators--and-)
@@ -103,7 +103,7 @@ Responsible for breaking down the user's input command line into meaningful **to
 
 ### 3. **Parser** ###
 Processes the **token sequence** and constructs an **Abstract Syntax Tree (AST)** using the **[Recursive Descent Parsing](https://www.geeksforgeeks.org/recursive-descent-parser/)** algorithm.
-##### Example Command :#####
+##### Example Command : #####
 ```bash
 (cd && echo "=> /HOME" || echo "Failed") | grep "Changed" ; echo "End"
 ```
