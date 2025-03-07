@@ -10,8 +10,8 @@
 4. [How It Works](#how-it-works)
   - [1. User Input](#1-reads-user-input-from-the-terminal) 
   - [2. Lexer](#2-lexer) 
-      - [Tokenizer (Lexical Analysis)](#tokenizer-lexical-analysis)
-      - [Analyzer](#analyzer-syntactic--semantic-checks)
+      - [Tokenizer](#tokenizer-lexical-analysis-)
+      - [Analyzer](#analyzer-syntactic--semantic-checks-)
       - [Continuation prompts]()
   - [3. Parser](#3-parser) 
     - [Example Command]()
@@ -88,7 +88,7 @@
 
 ### 2. **Lexer** ###
 Responsible for breaking down the user's input command line into meaningful **tokens**, based on the [**Finite State Machine (FSM)**](https://en.wikipedia.org/wiki/Finite-state_machine) concept.
-##### **Tokenizer (Lexical Analysis)** #####
+##### **Tokenizer (Lexical Analysis) :** #####
 - Scans the input string and converts it into **tokens**, categorizing elements such as commands, operators, and literals...
 ##### **Analyzer (Syntactic & Semantic Checks) :** #####
 - Validates the **token sequence**, detecting **syntax errors**, ensuring **logical token order** (Grammar), Identifying **incomplete token sequences** to display **Continuation promptes**.
