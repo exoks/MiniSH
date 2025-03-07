@@ -27,7 +27,7 @@
       - [Logical Operators](#logical-operators--and-)
           - [`&&` operator](#--and-operator--)
           - [`||` operator](#--or-operator--)
-      - [Pipeline Management](#pipeline-management-cmd1--cmd2--cmdn)
+      - [Pipeline Management](#pipeline-management-cmd1--cmd2----cmdn)
       - [Manages Redirections](#manages-redirections-heredoc)
       - [Built-in Commands](#built-in-commands)
           - [Simple Commands]()
