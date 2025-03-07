@@ -23,10 +23,10 @@
       - [Exit Status Expansion](#exit-status-expansion-) 
       - [Heredoc](#heredoc-)
   - [5. Interpreter](#5-interpreter-executor)
-      - [Sequential command separator](#sequential-command-separator-)
+      - [Sequential command separator `;`](#sequential-command-separator-)
       - [Logical Operators](#logical-operators--and-)
-          - [`&&` operator]()
-          - [`||` operator]()
+          - [`&&` operator](#--and-operator--)
+          - [`||` operator](#--or-operator--)
       - [Pipeline Management](#pipeline-management-)
       - [Redirections Management](#manages-redirections--)
       - [Built-in Commands](#built-in-commands)
@@ -212,7 +212,9 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > Each command runs *independently*.
 
 ##### **Logical Operators (`&&` and `||`)** #####
-  - `&&` (AND operator): Executes the second command only if the first one succeeds (exit status 0).
+
+###### `&&` ( and operator ) : ######
+  - `&&` executes the second command only if the first one succeeds (exit status 0).
   - Example:
     ```bash
     cd ~ && echo "We are in $HOME"
@@ -220,7 +222,8 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > If `cd ~` succeeds (exit status == 0), `echo "we are in $HOME` runs.    
     > If `cd ~` fails (exit status != 0), `echo "we are in $HOME` is skipped.    
 
-  - `||` (OR operator): Executes the second command only if the first one fails (nonzero exit status) 
+###### `||` ( or operator ) : ######
+  - `||` executes the second command only if the first one fails (nonzero exit status) 
     ```bash
     rm -r test/ || echo "no such file or directory"
     ```
@@ -255,14 +258,17 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > The `minish` redirects `stdout` to outfile.txt.
 
 ##### **Built-in Commands** ##### 
-  - **Simple Commands:** When a command like `echo` or `cd` is used, the `minish` performs the operation directly **without forking** a new process.
+###### - **Simple Commands :** ######
+  - When a command like `echo` or `cd` is used, the `minish` performs the operation directly **without forking** a new process.
   - Example : 
     ```bash
     cd
     ```
     > The `minish` changes the current directory itself (without calling `/bin/cd`).  
     > No child process is created
-  - **Compound Commands:** When these built-in commands are combined with other shell constructs like pipes or subshells, the `minish` may need to **fork** a **new process** to execute them in the appropriate context. 
+
+###### - **Compound Commands :** ######
+  - When these built-in commands are combined with other shell constructs like pipes or subshells, the `minish` may need to **fork** a **new process** to execute them in the appropriate context. 
   - Example : 
     ```bash
     cd | ls
