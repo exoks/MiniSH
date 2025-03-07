@@ -19,22 +19,22 @@
     - [4. Expander](#4-expander)
         - [ENV Expansion](#env-expansion-var)
         - [Tilde Expansion (`~`)](#tilde-expansion-) 
-        - [Wildcard Expansion](#wildcard-expansion-) 
-        - [Exit Status Expansion](#exit-status-expansion-) 
-        - [Heredoc](#heredoc-)
+        - [Wildcard Expansion (`*`)](#wildcard-expansion-) 
+        - [Exit Status Expansion (`$?`)](#exit-status-expansion-) 
+        - [Heredoc `<<`](#heredoc-)
     - [5. Interpreter](#5-interpreter-executor)
         - [1. Sequential command separator `;`](#1-sequential-command-separator-)
-        - [Logical Operators](#logical-operators--and-)
+        - [2. Logical Operators](#2-logical-operators--and-)
             - [`&&` operator](#--and-operator--)
             - [`||` operator](#--or-operator--)
-        - [Pipeline Management](#pipeline-management-cmd1--cmd2----cmdn)
-        - [Manages Redirections](#manages-redirections----and-heredoc-)
-        - [Built-in Commands](#built-in-commands)
+        - [3. Pipeline Management (`cmd1 | cmd2 | ... | cmdn`)](#3-pipeline-management-cmd1--cmd2----cmdn)
+        - [4. Redirection Management (`<`, `<<`, `>>`, `>`)](#4-manages-redirections----and-heredoc-)
+        - [5. Built-in Commands (`cd`, `exit`, `clear`, `export`, ...)](#5-built-in-commands)
             - [Simple Commands](#simple-commands-)
             - [Compound Commands](#compound-commands-)
-        - [External Commands](#external-commands)
-        - [Subshells `(...)`](#subshells-)
-        - [Signals Management](#signals-management)
+        - [6. External Commands](#6-external-commands)
+        - [7. Subshells `(...)`](#7-subshells-)
+        - [8. Signals Management](#8-signals-management)
 5. [Usage Guide](#usage-guide)  
       - [Building the Project](#building-the-project)
       - [Cleanup](#cleanup)
@@ -214,7 +214,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > Each command runs *independently*.
 
 
-##### **Logical Operators (`&&` and `||`)** #####
+##### **2. Logical Operators (`&&` and `||`)** #####
 ###### ** `&&` ( and operator ) :** ######
   - `&&` executes the second command only if the first one succeeds (exit status 0).
   - Example:
@@ -237,7 +237,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > If `make` succeeds, `./minish` runs.  
     > If either `make` or `./minish` fails, `echo "minish: Build failed"` runs.
 
-##### **Pipeline Management (`cmd1` | `cmd2` | ... | `cmdn`)** ##### 
+##### **3. Pipeline Management (`cmd1` | `cmd2` | ... | `cmdn`)** ##### 
   - The Interpreter sets up pipes to connect multiple processes.
   - Example:
     ```bash
@@ -250,7 +250,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
 
     > The `minish` ***waits*** for both processes.
 
-##### **Manages Redirections (`<`, `>`, `>>` and `heredoc`-`<<`)** #####
+##### **4. Manages Redirections (`<`, `>`, `>>` and `heredoc`-`<<`)** #####
   - If redirection is detected, The interpreter replaces standard (input/output) of the child process.
   - Example : 
     ```bash
@@ -259,7 +259,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > The `minish` redirects `stdin` to infile.txt.  
     > The `minish` redirects `stdout` to outfile.txt.
 
-##### **Built-in Commands** ##### 
+##### **5. Built-in Commands** ##### 
 
 ###### **Simple Commands :** ######
   - When a command like `echo` or `cd` is used, the `minish` performs the operation directly **without forking** a new process.
@@ -278,7 +278,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     ```
     > The `minish` won't change the current directory itself.  
 
-##### **External Commands** #####
+##### **6. External Commands** #####
   - If the command is not built-in, the interpreter calls `fork()` and `execve()` ***syscalls*** to run the program.
   - Example : 
     ```bash
@@ -288,7 +288,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > The child process calls `execve("/bin/ls", ["ls", "-a"], env)`.  
     > The **parent process** ***waits** for the child to finish (`waitpid()`).
 
-##### **Subshells `(...)`** #####
+##### **7. Subshells `(...)`** #####
   - Commands inside **parentheses `()`** are executed in a **subshell** (a child process).
   - Example : 
     ```bash
@@ -298,7 +298,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > Inside the subshell, it changes the directory to `$HOME` and runs `ls`.  
     > The **parent `minish`’s** working directory is **unchanged**.
 
-##### **Signals Management** ##### 
+##### **8. Signals Management** ##### 
   - `Ctrl+C`: Sends a `SIGINT` signal, which interrupts the currently running command.
   - `Ctrl+D`: Sends an `EOF` (End of File) signal to the `minish`, causing it to exit or terminate the current command if no command is running.
 
