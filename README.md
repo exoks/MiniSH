@@ -8,34 +8,36 @@
 2. [Features](#features)  
 3. [MiniSH Struct](#minish-structure)
 4. [How It Works](#how-it-works)
-  - [1. User Input](#1-reads-user-input-from-the-terminal) 
-  - [2. Lexer](#2-lexer) 
-      - [Tokenizer](#tokenizer-lexical-analysis-)
-      - [Analyzer](#analyzer-syntactic--semantic-checks-)
-      - [Continuation prompts](#continuation-promptes-)
-  - [3. Parser](#3-parser) 
-    - [Example Command](#example-command-)
-    - [Corresponding AST](#corresponding-ast--binary-tree)
-  - [4. Expander](#4-expander)
-      - [ENV Expansion](#env-expansion-var))
-      - [Tilde Expansion (`~`)](#tilde-expansion-) 
-      - [Wildcard Expansion](#wildcard-expansion-) 
-      - [Exit Status Expansion](#exit-status-expansion-) 
-      - [Heredoc](#heredoc-)
-  - [5. Interpreter](#5-interpreter-executor)
-      - [Sequential command separator `;`](#sequential-command-separator-)
-      - [Logical Operators](#logical-operators--and-)
-          - [`&&` operator](#--and-operator--)
-          - [`||` operator](#--or-operator--)
-      - [Pipeline Management](#pipeline-management-cmd1--cmd2----cmdn)
-      - [Manages Redirections](#manages-redirections----and-heredoc-)
-      - [Built-in Commands](#built-in-commands)
-          - [Simple Commands](#simple-commands-)
-          - [Compound Commands](#compound-commands-)
-      - [External Commands](#external-commands)
-      - [Subshells `(...)`](#subshells-)
-      - [Signals Management](#signals-management)
+    - [1. User Input](#1-reads-user-input-from-the-terminal) 
+    - [2. Lexer](#2-lexer) 
+        - [Tokenizer](#tokenizer-lexical-analysis-)
+        - [Analyzer](#analyzer-syntactic--semantic-checks-)
+        - [Continuation prompts](#continuation-promptes-)
+    - [3. Parser](#3-parser) 
+      - [Example Command](#example-command-)
+      - [Corresponding AST](#corresponding-ast--binary-tree)
+    - [4. Expander](#4-expander)
+        - [ENV Expansion](#env-expansion-var)
+        - [Tilde Expansion (`~`)](#tilde-expansion-) 
+        - [Wildcard Expansion](#wildcard-expansion-) 
+        - [Exit Status Expansion](#exit-status-expansion-) 
+        - [Heredoc](#heredoc-)
+    - [5. Interpreter](#5-interpreter-executor)
+        - [Sequential command separator `;`](#sequential-command-separator-)
+        - [Logical Operators](#logical-operators--and-)
+            - [`&&` operator](#--and-operator--)
+            - [`||` operator](#--or-operator--)
+        - [Pipeline Management](#pipeline-management-cmd1--cmd2----cmdn)
+        - [Manages Redirections](#manages-redirections----and-heredoc-)
+        - [Built-in Commands](#built-in-commands)
+            - [Simple Commands](#simple-commands-)
+            - [Compound Commands](#compound-commands-)
+        - [External Commands](#external-commands)
+        - [Subshells `(...)`](#subshells-)
+        - [Signals Management](#signals-management)
 5. [Usage Guide](#usage-guide)  
+      - [Building the Project](#building-the-project)
+      - [Cleanup](#cleanup)
 
 ---
 
@@ -304,17 +306,31 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
 
 ## **Usage Guide** ##
 
+### **Building the Project** ###
 1. Clone **MiniSH** repository: 
 ```bash
 git clone https://github.com/exoks/MiniSH.git
 cd MiniSH
 ```
-2. Build `minishell` executable:
+2. Compile the `minish` executable:
 ```bash
 make
 ```
-3. Run `minishell` executable
+3. Run `minish`:
 ```bash
 make run
 ```
+---
+
+### **Cleanup** ###
+* Remove object files:
+```sh
+make clean
+```
+
+* Remove all binaries and object files:
+```sh
+make fclean
+```
+
 ---
