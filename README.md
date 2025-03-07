@@ -27,8 +27,8 @@
       - [Logical Operators](#logical-operators--and-)
           - [`&&` operator](#--and-operator--)
           - [`||` operator](#--or-operator--)
-      - [Pipeline Management](#pipeline-management-)
-      - [Redirections Management](#manages-redirections--)
+      - [Pipeline Management](#pipeline-management-cmd1--cmd2--cmdn)
+      - [Manages Redirections](#manages-redirections-heredoc)
       - [Built-in Commands](#built-in-commands)
           - [Simple Commands]()
           - [Compound Commands]()
@@ -213,7 +213,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
 
 ##### **Logical Operators (`&&` and `||`)** #####
 
-###### `&&` ( and operator ) : ######
+###### **`&&` ( and operator ) :** ######
   - `&&` executes the second command only if the first one succeeds (exit status 0).
   - Example:
     ```bash
@@ -222,7 +222,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > If `cd ~` succeeds (exit status == 0), `echo "we are in $HOME` runs.    
     > If `cd ~` fails (exit status != 0), `echo "we are in $HOME` is skipped.    
 
-###### `||` ( or operator ) : ######
+###### **`||` ( or operator ) :** ######
   - `||` executes the second command only if the first one fails (nonzero exit status) 
     ```bash
     rm -r test/ || echo "no such file or directory"
@@ -258,6 +258,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > The `minish` redirects `stdout` to outfile.txt.
 
 ##### **Built-in Commands** ##### 
+
 ###### - **Simple Commands :** ######
   - When a command like `echo` or `cd` is used, the `minish` performs the operation directly **without forking** a new process.
   - Example : 
