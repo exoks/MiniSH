@@ -14,8 +14,8 @@
       - [Analyzer](#analyzer-syntactic--semantic-checks-)
       - [Continuation prompts](#continuation-promptes-)
   - [3. Parser](#3-parser) 
-    - [Example Command]()
-    - [Corresponding AST: Binary Tree]()
+    - [Example Command](#example-command-)
+    - [Corresponding AST](#corresponding-ast--binary-tree)
   - [4. Expander](#4-expander)
       - [ENV Expansion]()
       - [Tilde Expansion (`~`)]() 
@@ -103,11 +103,11 @@ Responsible for breaking down the user's input command line into meaningful **to
 
 ### 3. **Parser** ###
 Processes the **token sequence** and constructs an **Abstract Syntax Tree (AST)** using the **[Recursive Descent Parsing](https://www.geeksforgeeks.org/recursive-descent-parser/)** algorithm.
-##### Example Command: #####
+##### Example Command :#####
 ```bash
 (cd && echo "=> /HOME" || echo "Failed") | grep "Changed" ; echo "End"
 ```
-##### Corresponding AST: Binary Tree ####
+##### Corresponding AST : Binary Tree ####
 ```bash
                                           Root Node
                                             [`;`]
