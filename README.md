@@ -26,8 +26,8 @@
     - [5. Interpreter](#5-interpreter-executor)
         - [1. Sequential command separator `;`](#1-sequential-command-separator-)
         - [2. Logical Operators](#2-logical-operators--and-)
-            - [`&&` operator](#--and-operator--)
-            - [`||` operator](#--or-operator--)
+            - [And operator `&&`](#and-operator--)
+            - [Or operator `||`](#or-operator--)
         - [3. Pipeline Management (`cmd1 | cmd2 | ... | cmdn`)](#3-pipeline-management-cmd1--cmd2----cmdn)
         - [4. Redirection Management (`<`, `<<`, `>>`, `>`)](#4-manages-redirections----and-heredoc-)
         - [5. Built-in Commands (`cd`, `exit`, `clear`, `export`, ...)](#5-built-in-commands)
@@ -221,7 +221,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
 
 
 ##### **2. Logical Operators (`&&` and `||`)** #####
-###### **`&&` ( and operator ) :** ######
+###### **And operator `&&` :** ######
   - `&&` executes the second command only if the first one succeeds (exit status 0).
   - Example:
     ```bash
@@ -230,7 +230,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > If `cd ~` succeeds (exit status == 0), `echo "we are in $HOME` runs.    
     > If `cd ~` fails (exit status != 0), `echo "we are in $HOME` is skipped.    
 
-###### **`||` ( or operator ) :** ######
+###### **Or operator (`||`) :** ######
   - `||` executes the second command only if the first one fails (nonzero exit status) 
     ```bash
     rm -r test/ || echo "no such file or directory"
@@ -257,7 +257,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
     > The `minish` ***waits*** for both processes.
 
 ##### **4. Manages Redirections (`<`, `>`, `>>` and `heredoc`-`<<`)** #####
-  - If redirection is detected, The interpreter replaces standard (input/output) of the child process.
+  - If redirection is detected, The interpreter duplicates standard (input/output) of the child process.
   - Example : 
     ```bash
     < infile.txt cat -e > outfile.txt
