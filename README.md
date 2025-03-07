@@ -16,6 +16,7 @@
     - [3. Parser](#3-parser) 
       - [Example Command](#example-command-)
       - [Corresponding AST](#corresponding-ast--binary-tree)
+      - [Parsing Order in MiniSH](#parsing-order-in-minish-)
     - [4. Expander](#4-expander)
         - [ENV Expansion](#env-expansion-var)
         - [Tilde Expansion (`~`)](#tilde-expansion-) 
@@ -130,11 +131,16 @@ This shows how the command is split into parts, with each operator (`;`, `|`, `&
 
 ---
 
-##### MiniSH operators priority: ####
-1. `;`
-2. `&&` and `||`
-3. Pipes `|` 
-4. `cmds` and `subshell`
+##### **Parsing Order in MiniSH :** ####
+The **Recursive Descent Parser** in MiniSH processes the command structure by following a *priority-based approach* to build an Abstract Syntax Tree (`AST`):
+
+1. The parser first looks for semicolons (`;`). If found, it creates a node with two child nodes representing the commands before and after the `;`.
+
+2. It then searches for logical operators (`&&` and `||`).
+
+3. Next, It searches for pipe (`|`)
+
+4. Finally, subshells (`()`) and individual commands are parsed and attached as leaf nodes in the `AST`.
 
 ---
 
