@@ -215,7 +215,7 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
 
 
 ##### **2. Logical Operators (`&&` and `||`)** #####
-###### ** `&&` ( and operator ) :** ######
+###### **`&&` ( and operator ) :** ######
   - `&&` executes the second command only if the first one succeeds (exit status 0).
   - Example:
     ```bash
