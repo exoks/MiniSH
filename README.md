@@ -87,6 +87,7 @@
 ---
 
 ## **How It Works** ##
+
 ### 1. Reads user input from the terminal ###
 
 ### 2. **Lexer** ###
@@ -128,8 +129,6 @@ Processes the **token sequence** and constructs an **Abstract Syntax Tree (AST)*
                        [echo "=> /HOME"]    [echo "Failed"]
 ```
 This shows how the command is split into parts, with each operator (`;`, `|`, `&&`, `||`, `()`) forming a node in the tree. The recursive descent parser processes each part in order of operator priority, ensuring the command is parsed and executed correctly.
-
----
 
 ##### **Parsing Order in MiniSH :** ####
 The **Recursive Descent Parser** in MiniSH processes the command structure by following a *priority-based approach* to build an Abstract Syntax Tree (`AST`):
