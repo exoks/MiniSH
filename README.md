@@ -4,7 +4,7 @@
 <img width="1164" alt="Image" src="https://github.com/user-attachments/assets/ac24122e-bed0-4d6b-9094-b734a7bcd6ed" />
 
 ## **Table of Contents** ## 
-1. [Introduction](#MiniSH)  
+1. [Introduction](#MiniSH)
 2. [Features](#features)  
 3. [MiniSH Struct](#minish-structure)
 4. [How It Works](#how-it-works)
@@ -39,8 +39,6 @@
 5. [Usage Guide](#usage-guide)  
       - [Building the Project](#building-the-project)
       - [Cleanup](#cleanup)
-
----
 
 ## **Features** ##
 * **Interactive** shell prompt
@@ -79,12 +77,8 @@
 * Displays the current working directory in the `minish` prompt.
 * History tracking
 
---- 
-
 ## **MiniSH Structure** ##
 <img width="300" alt="Image" src="https://github.com/user-attachments/assets/ca150e0b-59c3-478e-8ac9-2c2f89fe9b3f" />
-
----
 
 ## **How It Works** ##
 
@@ -140,8 +134,6 @@ The **Recursive Descent Parser** in MiniSH processes the command structure by fo
 3. Next, It searches for pipe (`|`)
 
 4. Finally, subshells (`()`) and individual commands are parsed and attached as leaf nodes in the `AST`.
-
----
 
 ### 4. **Expander** ###
 Responsible for handling **variable substitution** (`$USER`), **wildcard expansion** (`*`), and **tilde** (`~`) ...
@@ -307,8 +299,6 @@ The interpreter is responsible for executing the Abstract Syntax Tree (AST) recu
   - `Ctrl+C`: Sends a `SIGINT` signal, which interrupts the currently running command.
   - `Ctrl+D`: Sends an `EOF` (End of File) signal to the `minish`, causing it to exit or terminate the current command if no command is running.
 
----
-
 ## **Usage Guide** ##
 
 ### **Building the Project** ###
@@ -325,7 +315,6 @@ make
 ```bash
 make run
 ```
----
 
 ### **Cleanup** ###
 * Remove object files:
