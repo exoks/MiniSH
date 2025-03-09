@@ -67,7 +67,7 @@ OBJ_BNS	:= $(addprefix $(OBJ_DIR)/, ${SRC_BNS:.c=.o})
 SRC_BNS	:= $(addprefix $(SRC_DIR)/, $(SRC)) 
 
 #====<[ Rules: ]>===============================================================
-all: signature $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJ_BNS) 
 	@ar -rcs $@ $^
@@ -76,10 +76,6 @@ $(NAME): $(OBJ) $(OBJ_BNS)
 bonus: $(OBJ_BNS)
 	@ar -rcs $(NAME) $<
 	@echo "${GREEN}[OK]: ${CYAN}$(NAME) ✔️${RESET}"
-
-signature:
-	@printf "${GRAY}%19s${RESET}\n"	"𓆩♕𓆪"
-	@printf "${GRAY}%s${RESET}\n"		"𓄂 oussama ezzaou𓆃  "
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) 
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
@@ -110,5 +106,5 @@ fclean: clean
 
 re: fclean all
 
-.PHONY : all bonus clean fclean re signature
+.PHONY : all bonus clean fclean re
 #===============================================================================
